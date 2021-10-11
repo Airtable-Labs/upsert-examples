@@ -31,7 +31,6 @@ The software made available from this repository is not supported by Formagrid I
   - `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base's API docs from https://airtable.com/api. This will always start with `app`
   - `AIRTABLE_TABLE_ID` - the ID of the table you want to create/update records in; you can find this in the URL of your browser when viewing the table. It will start with `tbl`
   - `AIRTABLE_UNIQUE_FIELD_NAME` - the field name of the field that is used for determining if an existing records exists that needs to be updated (if no record exists, a new one will be created)
-  - `AIRTABLE_API_MS_TO_SLEEP` - the number of milliseconds for the code to wait after each API call. Used for self rate-limiting.
 
 ### Notes
 - The [pyairtable](https://github.com/gtalarico/pyairtable) handles API rate limiting
