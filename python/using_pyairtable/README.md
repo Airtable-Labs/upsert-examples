@@ -4,8 +4,6 @@ This example uses [pyairtable](https://github.com/gtalarico/pyairtable), a commu
 
 The example code in this repository assumes your base has a table with the following fields: First Name (Single line text), Last Name (Single line text), Unique ID (Single line text), Job Title (Single line text), and Hire Number (Number). You can create a copy of a sample base with 200 records prepopulated [here](https://airtable.com/shrgakIqrpwtkQL2p).
 
-[Mockaroo](https://www.mockaroo.com/) was used to generate example data used in this example.
-
 ---
 
 The software made available from this repository is not supported by Formagrid Inc (Airtable) or part of the Airtable Service. It is made available on an "as is" basis and provided without express or implied warranties of any kind.
@@ -37,3 +35,4 @@ The software made available from this repository is not supported by Formagrid I
 - The field used for uniqueness does not have to be the primary field.
 - The field name for the unique field is expected to remain consistent. If it changes, update the environment variable
 - Each existing and new record is expected to have a value for the field used for uniqueness. 
+- [Mockaroo](https://www.mockaroo.com/) was used to generate example data used in this example.
