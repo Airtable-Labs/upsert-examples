@@ -48,7 +48,7 @@ upsertFieldValueToExistingRecordId = {
 recordsToCreate = []
 recordsToUpdate = []
 
-# For each input record, check if it exists in the existing records. If it does, update it. If it does not, create it.  console.log(`Processing ${inputRecords.length} to determine update or create`)
+# For each input record, check if it exists in the existing records. If it does, update it. If it does not, create it.
 print('\nProcessing {} input records to determine whether to update or create'.format(
     len(inputRecords)))
 for inputRecord in inputRecords:
