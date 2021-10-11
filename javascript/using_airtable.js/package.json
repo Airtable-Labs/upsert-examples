@@ -1,0 +1,21 @@
+{
+  "name": "airtable_upsert_using_airtable.js",
+  "version": "0.0.1",
+  "description": "An example of how to upsert Airtable data using airtable.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "lint": "npx standard",
+    "lint:fix": "npx standard --fix"
+  },
+  "author": "mark.silverberg@airtable.com",
+  "license": "MIT",
+  "dependencies": {
+    "airtable": "^0.11.1",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "standard": "^16.0.3"
+  }
+}
