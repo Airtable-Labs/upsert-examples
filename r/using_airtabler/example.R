@@ -6,7 +6,6 @@ remotes::install_github('bergant/airtabler') # for interacting with the Airtable
 library(dotenv) # reads .env file on library load
 library(airtabler)
 
-
 # Configure and initialize Airtable client
 airtable_table_id <- Sys.getenv("AIRTABLE_TABLE_ID")
 airtable_base <- airtable(
