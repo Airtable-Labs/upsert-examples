@@ -30,7 +30,7 @@ The software made available from this repository is not supported by Formagrid I
   - `AIRTABLE_UNIQUE_FIELD_NAME` - the field name of the field that is used for determining if an existing records exists that needs to be updated (if no record exists, a new one will be created)
 
 ### Notes
-- ⚠️ The [airtabler](https://github.com/bergant/airtabler) does not appear to handle API rate limiting for you
+- ⚠️ The [airtabler](https://github.com/bergant/airtabler) does not appear to handle API rate or batching of insert/update requests for you
 - The field used for uniqueness does not have to be the primary field.
 - The field name for the unique field is expected to remain consistent. If it changes, update the environment variable
 - Each existing and new record is expected to have a value for the field used for uniqueness. 
