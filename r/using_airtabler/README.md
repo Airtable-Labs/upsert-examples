@@ -14,7 +14,7 @@ The software made available from this repository is not supported by Formagrid I
 1. Clone/unzip code
 2. Copy `.env.example` to `.env` and populate values
 3. (Optional) Modify `input_records` in `example.R` with new static values or dynamically fetched values from your source of choice (API, file, etc.)
-4. Run `Rscript example.py` to run the example. Note that the first few lines install external dependencies which you may want to comment out once they have been added to your local R installation.
+4. Run `Rscript example.R` to run the example. Note that the first few lines install external dependencies which you may want to comment out once they have been added to your local R installation.
 
 ### Key files and their contents
 - [`example.R`](example.R) is the main code file which is executed when `Rscript example.R` is run. At a high level, it performs the following:
