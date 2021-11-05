@@ -9,6 +9,9 @@ The following four examples are available (and pull requests are always welcome!
   - [*using Airtable Scripting Apps*](javascript/using_airtable-scripting/), when you want Airtable to host your Javascript code alongside your base
 - **Python**
   - [*using pyairtable*](python/using_pyairtable/) (a community supported Airtable SDK)
+- **R**
+  - [*using airtabler*](r/using_airtabler/) (a community supported Airtable SDK)
+
 
 
 ---
