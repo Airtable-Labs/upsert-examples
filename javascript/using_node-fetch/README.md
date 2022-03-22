@@ -20,7 +20,7 @@ The software made available from this repository is not supported by Formagrid I
 - [`index.js`](index.js) is the main code file which is executed when `npm start` is run. At a high level, it performs the following:
   - Loads dependencies, [`helpers.js`](helpers.js), and configuration variables
   - Defines a sample `inputRecords` array which should be modified to reference an external data source
-  - Retrieves all existing records in the Airtable base and creates a mapping of the unqiue field's value to the existing record ID for later updated
+  - Retrieves all existing records in the Airtable base and creates a mapping of the unqiue field's value to the existing record ID for later updating
   - Loops through each record from `inputRecords` array and determines if an existing record should be updated or a new one should be created
   - In chunks of 10, updates existing and creates new records
 - [`helpers.js`](helpers.js) is referenced by [`index.js`](index.js) and contains helper functions to call the [Airtable REST API](https://support.airtable.com/hc/en-us/articles/203313985-Public-REST-API), chunk arrays, create mappings, and more.
