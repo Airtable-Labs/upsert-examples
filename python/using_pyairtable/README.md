@@ -21,7 +21,7 @@ The software made available from this repository is not supported by Formagrid I
 - [`example.py`](example.py) is the main code file which is executed when `python3 example.py` is run. At a high level, it performs the following:
   - Loads dependencies and configuration variables
   - Defines a sample `inputRecords` array which should be modified to reference an external data source
-  - Retrieves all existing records in the Airtable base and creates a mapping of the unqiue field's value to the existing record ID for later updated
+  - Retrieves all existing records in the Airtable base and creates a mapping of the unqiue field's value to the existing record ID for later updating
   - Loops through each record from `inputRecords` array and determines if an existing record should be updated or a new one should be created
   - In chunks of 10, updates existing and creates new records
 - [`.env.example`](.env.example) is an example file template to follow for your own `.env` file. The environment variables supported are:
