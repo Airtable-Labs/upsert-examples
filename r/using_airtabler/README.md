@@ -20,7 +20,7 @@ The software made available from this repository is not supported by Formagrid I
 - [`example.R`](example.R) is the main code file which is executed when `Rscript example.R` is run. At a high level, it performs the following:
   - Loads dependencies and configuration variables
   - Defines a sample `input_records` array which should be modified to reference an external data source
-  - Retrieves all existing records in the Airtable base and creates a mapping of the unqiue field's value to the existing record ID for later updated
+  - Retrieves all existing records in the Airtable base and creates a mapping of the unqiue field's value to the existing record ID for later updating
   - Loops through each record from `input_records` array and determines if an existing record should be updated or a new one should be created
   - Creates new and updates existing records
 - [`.env.example`](.env.example) is an example file template to follow for your own `.env` file. The environment variables supported are:
