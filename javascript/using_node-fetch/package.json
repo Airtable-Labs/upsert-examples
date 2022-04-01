@@ -13,7 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^10.0.0",
-    "node-fetch": "^2.0.0"
+    "node-fetch": "^2.6.7"
   },
   "devDependencies": {
     "standard": "^16.0.3"
