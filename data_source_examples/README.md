@@ -1,6 +1,6 @@
 This sub folder (`data_source_examples`) includes data source specific upsert examples.
 
-If you don't see an example for your data source, check out our top-level [README.md here](../README.md) which has a list of generic examples in Javascript, Python, and more.
+If you don't see an example for your data source or are looking for data source agnostic examples, visit out our top-level [README.md here](../README.md) which has a list of generic examples.
 
 ---
 
