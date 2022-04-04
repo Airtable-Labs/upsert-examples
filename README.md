@@ -1,6 +1,6 @@
 # Airtable Upsert Examples
 
-This repository contains examples demonstrating how to "upsert" (update or insert) records to an Airtable table in various programming languages and environments, including both (a) "generic" and (b) "data source specific" exmaples.
+This repository contains examples demonstrating how to "upsert" (update or insert) records to an Airtable table in various programming languages and environments, including both (a) "generic" and (b) "data source specific" examples.
 
 The following five generic examples are available at the top level of this repository:
 - **Node/Javscript**
