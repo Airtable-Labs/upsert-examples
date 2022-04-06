@@ -16,7 +16,7 @@ AIRTABLE_UNIQUE_FIELD_NAME = ENV.fetch('AIRTABLE_UNIQUE_FIELD_NAME')
 Table = Airrecord.table(AIRTABLE_API_KEY, AIRTABLE_BASE_ID, AIRTABLE_TABLE_ID)
 
 # Define input records(from the source system). This would usually be an API call or reading in a CSV or other format of data.
-inputRecords = [
+input_records = [
   # Existing person in the table, if using the sample data linked to in the README
   {
     'First Name': 'Juliette',
@@ -35,59 +35,59 @@ inputRecords = [
 ]
 
 # Retrieve all existing records from the base through the Airtable REST API
-allExistingRecords = Table.all
-puts "#{allExistingRecords.count} existing records found"
+all_existing_records = Table.all
+puts "#{all_existing_records.count} existing records found"
 
 # Create an object mapping of the primary field to the record ID
 # Remember, it's assumed that the AIRTABLE_UNIQUE_FIELD_NAME field is truly unique
-upsertFieldValueToExistingRecord = {}
-allExistingRecords.each do |existingRecord|
-  upsertFieldValueToExistingRecord[existingRecord[AIRTABLE_UNIQUE_FIELD_NAME]] = existingRecord
+upsert_field_value_to_existing_record = {}
+all_existing_records.each do |existing_record|
+  upsert_field_value_to_existing_record[existing_record[AIRTABLE_UNIQUE_FIELD_NAME]] = existing_record
 end
 
 # Create two arrays: one for records to be created, one for records to be updated
-recordsToCreate = []
-recordsToUpdate = []
+records_to_create = []
+records_to_update = []
 
 # # For each input record, check if it exists in the existing records. If it does, update it. If it does not, create it.
-puts "\nProcessing #{inputRecords.count} input records to determine whether to update or create"
-inputRecords.each do |inputRecord|
-  recordUniqueValue = inputRecord[AIRTABLE_UNIQUE_FIELD_NAME.to_sym]
-  puts "  Processing record w / \'#{AIRTABLE_UNIQUE_FIELD_NAME}\' === \'#{recordUniqueValue}\'"
-  existingRecordBasedOnUpsertFieldValueMaybe = upsertFieldValueToExistingRecord[recordUniqueValue]
+puts "\nProcessing #{input_records.count} input records to determine whether to update or create"
+input_records.each do |input_record|
+  record_unique_value = input_record[AIRTABLE_UNIQUE_FIELD_NAME.to_sym]
+  puts "  Processing record w / \'#{AIRTABLE_UNIQUE_FIELD_NAME}\' === \'#{record_unique_value}\'"
+  existing_record_based_on_upsert_field_value_maybe = upsert_field_value_to_existing_record[record_unique_value]
 
   # and if the upsert field value matches an existing one...
-  if existingRecordBasedOnUpsertFieldValueMaybe
+  if existing_record_based_on_upsert_field_value_maybe
     # Add record to list of records to update
-    puts "    Existing record w / ID #{existingRecordBasedOnUpsertFieldValueMaybe.id} found; adding to recordsToUpdate"
-    recordsToUpdate.push({:existingRecord => existingRecordBasedOnUpsertFieldValueMaybe, :inputRecord => inputRecord})
+    puts "    Existing record w / ID #{existing_record_based_on_upsert_field_value_maybe.id} found; adding to records_to_update"
+    records_to_update.push({:existing_record => existing_record_based_on_upsert_field_value_maybe, :input_record => input_record})
   else
     # Otherwise, add record to list of records to create
-    puts '    No existing records match; adding to recordsToCreate'
-    recordsToCreate.push(inputRecord)
+    puts '    No existing records match; adding to records_to_create'
+    records_to_create.push(input_record)
   end
 end
 
 # Read out array sizes
-puts "\n#{recordsToCreate.count} records to create"
-puts "#{recordsToUpdate.count} records to update"
+puts "\n#{records_to_create.count} records to create"
+puts "#{records_to_update.count} records to update"
 
 # Perform record creation, one at a time (Airrecord does not support batch updates at the moment)
-recordsToCreate.each do |recordToCreate|
-  Table.create(recordToCreate)
+records_to_create.each do |record_to_create|
+  Table.create(record_to_create)
 end
 
 # Perform record updates on existing records, one at a time (Airrecord does not support batch updates at the moment)
-recordsToUpdate.each do |recordToUpdate|
-  existingRecord = recordToUpdate[:existingRecord]
-  inputRecord = recordToUpdate[:inputRecord]
+records_to_update.each do |record_to_update|
+  existing_record = record_to_update[:existing_record]
+  input_record = record_to_update[:input_record]
 
   # Loop through all input records' fields and set the existing record's fields to the input record's fields
-  inputRecord.keys.each do |fieldName|
-    existingRecord[fieldName.to_s] = inputRecord[fieldName]
+  input_record.keys.each do |field_name|
+    existing_record[field_name.to_s] = input_record[field_name]
   end
   # Save the record
-  existingRecord.save
+  existing_record.save
 end
 
 puts "\n\nScript execution complete!"
