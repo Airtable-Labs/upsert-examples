@@ -53,7 +53,7 @@ records_to_update = []
 puts "\nProcessing #{input_records.count} input records to determine whether to update or create"
 input_records.each do |input_record|
   record_unique_value = input_record[AIRTABLE_UNIQUE_FIELD_NAME.to_sym]
-  puts "  Processing record w / \'#{AIRTABLE_UNIQUE_FIELD_NAME}\' === \'#{record_unique_value}\'"
+  puts "  Processing record w / \'#{AIRTABLE_UNIQUE_FIELD_NAME}\' == \'#{record_unique_value}\'"
   existing_record_based_on_upsert_field_value_maybe = upsert_field_value_to_existing_record[record_unique_value]
 
   # and if the upsert field value matches an existing one...
