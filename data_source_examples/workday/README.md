@@ -1,30 +1,33 @@
 # Using RaaS and Airtable.js to Import Workday Data into Airtable
 
-#### 🤔 What is RaaS?
-Workday has a _Reporting as a Service_ (RaaS) interface which allows you to export most data from Workday by creating a custom report within Workday then exposing it as a web service. The output can be various formats such as CSV, XML, JSON, etc.
+This example demonstrates how to use Workday RaaS to export data from Workday and Airtable's REST API to import that data into Airtable using [Airtable.js](https://github.com/airtable/airtable.js/). 
+
+Alternatively, you can use [Airtable Automations](https://support.airtable.com/hc/en-us/articles/360050974153-Automations-overview) with [Run a Script action](https://support.airtable.com/hc/en-us/articles/360051792333) which is detailed at the bottom of this README.
 
 #### ？What is Workday?
 Workday delivers user and administrative tools across financials, HR, planning, talent, payroll, analytics, and more.
 
 Just like any other ERP, it consists of data sources and business objects that make up the underlying building blocks to create a report.
 
+#### 🤔 What is RaaS?
+Workday has a _Reporting as a Service_ (RaaS) interface which allows you to export most data from Workday by creating a custom report within Workday then exposing it as a web service. The output can be various formats such as CSV, XML, JSON, etc.
 
-#### ⚙️ Components to this integration
+
+#### ⚙️ Prerequisites
 - Permissions to create/modify a RaaS URL for a Workday Advanced report
 - Access to an Airtable base
 - Node.js development environment and experience coding in Javascript
-- [Airtable.js library](https://github.com/airtable/airtable.js/)
 
-## Script setup
+## Quick Start
 1. Clone/unzip code
 2. Copy `.env.example` to `.env` and populate values:
-    * Airtable API Key
-    * Airtable Base ID
-    * Airtable Table ID
-    * Airtable Unique value Field Name
+    * Airtable API Key - this can be retrieved in your Account settings. [Here is a help article](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-)
+    * Airtable Base ID - the Base ID is located in the URL of the base after airtable.com/: https://airtable.com/**appXXXXXXXXXXXX**
+    * Airtable Table ID - the Table ID is located in the URL of the base as well: https://airtable.com/appXXXXXXXXXXXX/**tblXXXXXXXXXXX**
+    * Airtable Unique value Field Name - The field in Airtable that will represent the _unique identifier_
     * Workday username
     * Workday password
-    * Workday RaaS URL
+    * Workday RaaS URL - see instructions in the next section
 3. Install node dependencies using `npm install`
     * dotenv
     * axios
