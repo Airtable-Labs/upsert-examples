@@ -68,7 +68,8 @@ const purchaseOrderTable = base.getTable('Workday Purchase Orders - new');
 // create empty array to store transformed data
 const dataForAirtable = [];
 
-// loop through Workday data and transform schema, store in array
+// This example uses a specific schema
+// This will need to be updated to match the report you're pulling from
 for (const purchase of purchaseOrders) {
     purchase['Purchase_Order_Line_group'].map(lineItem => {
         dataForAirtable.push({
@@ -117,6 +118,9 @@ const recordsToUpdate = [];
 
 // // loop through data transformed in previous steps, create unique key to compare against existing data
 for (const record of dataForAirtable) {
+
+  // Create unique key that exists in Airtable. This will be used to identify whether a record already exists and should be updated
+  // This is specific to the fields in the Workday report and the fields in Airtable. Update accordingly
   const uniqueKey = record.fields['Purchase Order'] + '|' + record.fields['Spend_Category_as_Worktag'] + '|' + record.fields['Extended Amount'];
 
   // find matching key and record ID
