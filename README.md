@@ -2,7 +2,7 @@
 
 This repository contains examples demonstrating how to "upsert" (update or insert) records to an Airtable table in various programming languages and environments, including both (a) "generic" and (b) "data source specific" examples.
 
-(a) The following five generic examples are available at the top level of this repository:
+(a) The following six generic examples are available at the top level of this repository:
 - **Node/Javscript**
   - [*using airtable.js*](javascript/using_airtable.js/), Airtable's first party Javascript SDK
   - [*using node-fetch*](javascript/using_node-fetch/), for times when you need to use minimal external dependencies
@@ -11,6 +11,8 @@ This repository contains examples demonstrating how to "upsert" (update or inser
   - [*using pyairtable*](python/using_pyairtable/) (a community supported Airtable SDK)
 - **R**
   - [*using airtabler*](r/using_airtabler/) (a community supported Airtable SDK)
+- **Ruby**
+  - [*using airrecord*](ruby/using_airrecord/) (a community supported Airtable SDK)
 
 (b) Data source specific examples can be found in the [`data_source_examples` directory](data_source_examples/).
 
