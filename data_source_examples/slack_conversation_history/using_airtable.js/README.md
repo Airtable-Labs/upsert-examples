@@ -15,7 +15,16 @@ The software made available from this repository is not supported by Formagrid I
 
 ---
 
-Rough setup
-- Create app and get token
-- Add app to channel
+## Setup steps
+
+### Airtable Base Setup
+First, create a table in a base you have creator-level access to and create a table with the following fields: 'Channel ID + TS' (Single line text), 'Channel ID' (Single line text), 'TS' (Single line text), 'Last Edited TS' (Single line text), 'Type' (Single line text), and 'Subtype' (Single line text), 'Slack User ID' (Single line text), 'Message text' (Long text), 'Reply Count' (Number), and 'Full Message Payload (JSON)' (Long text). You may also want to add a formula field named 'TS (Human Readable)' with the formual `DATETIME_PARSE({TS}, 'X')`. You can create a copy of a sample table with these fields [here](https://airtable.com/shrB2653wGPc4KwoZ).
+
+If you choose other field names, be sure to update the code in [index.js](./index.js).
+
+- **Slack app Setup**
+  - Create a custom app from https://api.slack.com/apps?new_app=1, making sure to select the Slack workspace that contains the channel you want to extract messages from.
+  - Add a **bot token scope** grom the app's 'OAuth & Permissions' page. If you are extracting messages from a public mesage, you'll want to add `channels:history`. For private channels add `groups:history`. For DMs or MPDMs, use `im:history` or `mpim:history`, respectively.
+  - Retrieve a **bot user token** for your workspace by clicking 'Install to Workspace' near the top of your app's 'OAuth & Permissions' page. This may require Slack admin approval.
+  - Once the app has been installed, be sure to add the app to the channel you want to extract messages from. You can type `/invite @<your app name here>`.
 - 
