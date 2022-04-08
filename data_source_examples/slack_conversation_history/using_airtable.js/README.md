@@ -4,11 +4,6 @@ This example brings the messages in a Slack (public or private channel, DM, or M
 
 At this time, threaded "replies" are not included -- only "parent" messages.
 
-## Airtable Base Setup
-The example code in this repository assumes your base has a table with the following fields: 'Channel ID + TS' (Single line text), 'Channel ID' (Single line text), 'TS' (Single line text), 'Last Edited TS' (Single line text), 'Type' (Single line text), and 'Subtype' (Single line text), 'Slack User ID' (Single line text), 'Message text' (Long text), 'Reply Count' (Number), and 'Full Message Payload (JSON)' (Long text). You may also want to add a formula field named 'TS (Human Readable)' with the formual `DATETIME_PARSE({TS}, 'X')`. You can create a copy of a sample table with these fields [here](https://airtable.com/shrB2653wGPc4KwoZ).
-
-If you choose other field names, be sure to update the code in [index.js](./index.js).
-
 ---
 
 The software made available from this repository is not supported by Formagrid Inc (Airtable) or part of the Airtable Service. It is made available on an "as is" basis and provided without express or implied warranties of any kind.
