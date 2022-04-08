@@ -1,0 +1,17 @@
+{
+  "name": "using_airtable",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@slack/web-api": "^6.7.1",
+    "airtable": "^0.11.3",
+    "dotenv": "^16.0.0"
+  }
+}
