@@ -7,7 +7,7 @@ const { WebClient: SlackWebClient } = require('@slack/web-api')
 
 // Load helper functions from *_helpers.js
 const { createMappingOfUniqueFieldToRecordId, actOnRecordsInChunks } = require('./airtable_helpers')
-const { getFullConvoHistory } = require('./slack_helpers')
+const { getMessages } = require('./slack_helpers')
 
 // Define variables and initialize Airtable client
 const { AIRTABLE_API_KEY, AIRTABLE_BASE_ID, AIRTABLE_TABLE_ID, AIRTABLE_UNIQUE_FIELD_NAME } = process.env
@@ -24,7 +24,7 @@ const slackWebClient = new SlackWebClient(SLACK_BOT_TOKEN);
 (async () => {
 
   // Get all messages from Slack for the given channel
-  const allMessages = await getFullConvoHistory(slackWebClient, { channel: SLACK_CHANNEL_ID })
+  const allMessages = await getMessages(slackWebClient, 'conversations.history', { channel: SLACK_CHANNEL_ID })
 
   // Define a new inputRecords array that converts the objects received from the Slack API to use Airtable field names
   const inputRecords = allMessages.map(msg => {

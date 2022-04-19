@@ -1,6 +1,5 @@
-// Recursive function to paginate through all history of a conversatoin
-const getFullConvoHistory = async function (client, params, data = []) {
-  const apiMethod = 'conversations.history'
+// Recursive function to paginate through all matching (parent) messages in a conversation
+const getMessages = async function (client, apiMethod, params, data = []) {
   console.log(`Querying ${apiMethod} with ${JSON.stringify(params)}; already have ${data.length} in array`)
 
   return client.conversations
@@ -22,5 +21,6 @@ const getFullConvoHistory = async function (client, params, data = []) {
 }
 
 module.exports = {
-  getFullConvoHistory
+  getMessages
 }
+
