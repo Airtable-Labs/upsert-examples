@@ -12,9 +12,9 @@ const actOnRecordsInChunks = async function (table, createOrUpdate, records) {
   for (const chunkOfRecords of arrayOfChunks) {
     console.log(`\tProcessing batch of ${chunkOfRecords.length} records`)
     if (createOrUpdate === 'create') {
-      await table.create(chunkOfRecords)
+      await table.create(chunkOfRecords, { typecast: true }) // typecast=true so that we can specify values instead of record IDs with the Airtable REST API
     } else if (createOrUpdate === 'update') {
-      await table.update(chunkOfRecords)
+      await table.update(chunkOfRecords, { typecast: true })
     } else {
       throw new Error(`Unexpected value for createOrUpdate: ${createOrUpdate}`)
     }

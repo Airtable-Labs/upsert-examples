@@ -1,14 +1,15 @@
-// Recursive function to paginate through all matching (parent) messages in a conversation
+// Recursive function to paginate through all matching messages
+//   tested values of apiMethod: 'conversations.history', 'conversations.replies'
 const getMessages = async function (client, apiMethod, params, data = []) {
   console.log(`Querying ${apiMethod} with ${JSON.stringify(params)}; already have ${data.length} in array`)
 
-  return client.conversations
-    .history(params)
+  return client.apiCall(apiMethod, params)
     .then(response => {
       data.push(...response.messages)
       if (response.has_more === false) return data
-      return getFullConvoHistory(
+      return getMessages(
         client,
+        apiMethod,
         Object.assign(params, {
           cursor: response.response_metadata.next_cursor
         }),
