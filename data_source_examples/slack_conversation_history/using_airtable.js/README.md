@@ -10,20 +10,28 @@ The software made available from this repository is not supported by Formagrid I
 
 ## Setup steps
 
-### Airtable Base Setup
+This section will walk you through setting up..
+1. An Airtable base where this example script will store messages from the Slack conversation you specify
+2. A custom Slack app and retrieving your Slack bot token, allowing you to retrieve messages from Slack
+3. This script, which will pull messages from the Slack converstion, compare it to existing records in you base, and create-or-update records in your base so they mirror the latest messages in Slack
+
+### 1. Airtable Base Setup
 First, create a table in a base you have creator-level access to and create a table with the following fields: 'Channel ID + TS' (Single line text), 'Channel ID' (Single line text), 'TS' (Single line text), 'Last Edited TS' (Single line text), 'Type' (Single line text), and 'Subtype' (Single line text), 'Slack User ID' (Single line text), 'Message text' (Long text), 'Reply Count' (Number), 'Parent Message' (self-linking Linked Record), and 'Full Message Payload (JSON)' (Long text).
 
-You may also want to add a formula field named 'TS (Human Readable)' with the formula `DATETIME_PARSE({TS}, 'X')` and another named 'Parent or Thread?' with the formula `IF({Parent Message},"Threaded reply","Parent message")`.
+- You may also want to add a formula field named 'TS (Human Readable)' with the formula `DATETIME_PARSE({TS}, 'X')` and another named 'Parent or Thread?' with the formula `IF({Parent Message},"Threaded reply","Parent message")`.
+- You can create a copy of a sample table with these fields [here](https://airtable.com/shrB2653wGPc4KwoZ).
+- If you choose other field names, be sure to update the code in [index.js](./index.js) in the `convertSlackMessageToAirtableRecord` function.
 
-You can create a copy of a sample table with these fields [here](https://airtable.com/shrB2653wGPc4KwoZ).
+### 2. Slack app Setup
+Follow these instructions to set up a Slack app, retrieve the token, and add your new bot to the channel(s) you want to extract history from
 
-If you choose other field names, be sure to update the code in [index.js](./index.js) in the `convertSlackMessageToAirtableRecord` function.
+- Create a custom app from https://api.slack.com/apps?new_app=1, making sure to select the Slack workspace that contains the channel you want to extract messages from.
+- Add a **bot token scope** from your new app's 'OAuth & Permissions' page. If you are extracting messages from a public mesage, you'll want to add `channels:history`. For private channels add `groups:history`. For DMs or MPDMs, use `im:history` or `mpim:history`, respectively. 
+- Retrieve a **bot user token** for your workspace by clicking 'Install to Workspace' near the top of your app's 'OAuth & Permissions' page. This may require Slack admin approval.
+- Once the app has been installed, be sure to add the app to the channel you want to extract messages from. You can type `/invite @<your app name here>`.
 
-- **Slack app Setup**
-  - Create a custom app from https://api.slack.com/apps?new_app=1, making sure to select the Slack workspace that contains the channel you want to extract messages from.
-  - Add a **bot token scope** grom the app's 'OAuth & Permissions' page. If you are extracting messages from a public mesage, you'll want to add `channels:history`. For private channels add `groups:history`. For DMs or MPDMs, use `im:history` or `mpim:history`, respectively.
-  - Retrieve a **bot user token** for your workspace by clicking 'Install to Workspace' near the top of your app's 'OAuth & Permissions' page. This may require Slack admin approval.
-  - Once the app has been installed, be sure to add the app to the channel you want to extract messages from. You can type `/invite @<your app name here>`.
+### 3. Run this script
+
 
 ## Misc Notes
 
