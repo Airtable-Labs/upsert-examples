@@ -1,15 +1,15 @@
 {
-  "name": "using_airtable",
+  "name": "airtable_upsert_slack_conversations",
   "version": "1.0.0",
-  "description": "",
+  "description": "This example brings the messages in a Slack (public or private channel, DM, or MPDM) conversation into an Airtable table.",
   "main": "index.js",
+  "homepage": "https://github.com/Airtable-Labs/upsert-examples",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "sync": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["airtable", "slack", "export"],
+  "license": "MIT",
   "dependencies": {
     "@slack/web-api": "^6.7.1",
     "airtable": "^0.11.3",
