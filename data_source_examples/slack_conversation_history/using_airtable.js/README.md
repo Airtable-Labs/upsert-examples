@@ -1,6 +1,8 @@
 # Bring Slack Conversation History into Airtable
 
-This example brings the messages in a Slack (public or private channel, DM, or MPDM) conversation into an Airtable table. Based on [the generic airtable.js upsert example](.../../../../../javascript/using_airtable.js/), this example uses [`airtable.js`](https://github.com/airtable/airtable.js) to interact with the Airtable REST API and [`@slack/web-api`](https://slack.dev/node-slack-sdk/web-api) to interact with Slack's API.
+This code example can be used to import messages from a Slack conversation (public or private channel, DM, or multi-party DM) into an Airtable table. You can also schedule this script to run on a recurring to keep your table in Airtable up to date with the new messages from Slack.
+
+This code example is based on [the generic airtable.js upsert example](.../../../../../javascript/using_airtable.js/) and uses [`airtable.js`](https://github.com/airtable/airtable.js) to interact with the Airtable REST API and [`@slack/web-api`](https://slack.dev/node-slack-sdk/web-api) to interact with Slack's API.
 
 ---
 
@@ -10,23 +12,23 @@ The software made available from this repository is not supported by Formagrid I
 
 ## Setup steps
 
-This section will walk you through setting up:
+This section will walk you through setting up three components:
 
 - A. An Airtable base where this example script will store messages from the Slack conversation you specify
 - B. A custom Slack app and retrieving your Slack bot token, allowing you to retrieve messages from Slack
-- C. This script, which will pull messages from the Slack converstion, compare it to existing records in you base, and create-or-update records in your base so they mirror the latest messages in Slack
+- C. This script (which will pull messages from the Slack converstion, compare it to existing records in you base, and create-or-update records in your base so they mirror the latest messages in Slack)
 
 ### A. Airtable Base Setup
 
 First, create a table in a base you have creator-level access to and create a table with the following fields: 'Channel ID + TS' (Single line text), 'Channel ID' (Single line text), 'TS' (Single line text), 'Last Edited TS' (Single line text), 'Type' (Single line text), and 'Subtype' (Single line text), 'Slack User ID' (Single line text), 'Message text' (Long text), 'Reply Count' (Number), 'Parent Message' (self-linking Linked Record), and 'Full Message Payload (JSON)' (Long text).
 
 - You may also want to add a formula field named 'TS (Human Readable)' with the formula `DATETIME_PARSE({TS}, 'X')` and another named 'Parent or Thread?' with the formula `IF({Parent Message},"Threaded reply","Parent message")`.
-- You can create a copy of a sample table with these fields [here](https://airtable.com/shrB2653wGPc4KwoZ).
+- You can create a copy of a sample table with these fields [from here](https://airtable.com/shrB2653wGPc4KwoZ) by selecting "Use data" in the top right corner.
 - If you choose other field names, be sure to update the code in [index.js](./index.js) in the `convertSlackMessageToAirtableRecord` function.
 
 ### B. Slack App Setup
 
-Follow these instructions to set up a Slack app, retrieve the token, and add your new bot to the channel(s) you want to extract history from.
+Follow these instructions to set up a Slack app, retrieve an API token, and add your new bot to the channel(s) you want to extract history from.
 
 1. Create a custom app from https://api.slack.com/apps?new_app=1, making sure to select the Slack workspace that contains the channel you want to extract messages from.
 2. Add a **bot token scope** from your new app's 'OAuth & Permissions' page. If you are extracting messages from a public mesage, you'll want to add `channels:history`. For private channels add `groups:history`. For DMs or MPDMs, use `im:history` or `mpim:history`, respectively. 
@@ -41,6 +43,7 @@ Finally, let's setup this script to run locally. You can later deploy this as a 
 2. Copy `.env.example` to `.env` and populate values (see below for details on each environment variable)
 3. Install node dependencies including Airtable and Slack's official SDKs by running `npm install`
 4. Trigger the script to execute by running `npm run sync`
+5. Records in the specified Airtable base's table should be created. Try adding new messages to the Slack channel and re-run the previous step.
  
 ### Key Files and Their Contents
 
