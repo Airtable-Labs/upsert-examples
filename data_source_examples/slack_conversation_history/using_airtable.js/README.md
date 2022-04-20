@@ -4,6 +4,8 @@ This code example can be used to import messages from a Slack conversation (publ
 
 This code example is based on [the generic airtable.js upsert example](.../../../../../javascript/using_airtable.js/) and uses [`airtable.js`](https://github.com/airtable/airtable.js) to interact with the Airtable REST API and [`@slack/web-api`](https://slack.dev/node-slack-sdk/web-api) to interact with Slack's API.
 
+[Click here to view a screenshot of an Airtable base alongside the Slack interface](./screenshot.png)
+
 ---
 
 The software made available from this repository is not supported by Formagrid Inc (Airtable) or part of the Airtable Service. It is made available on an "as is" basis and provided without express or implied warranties of any kind.
