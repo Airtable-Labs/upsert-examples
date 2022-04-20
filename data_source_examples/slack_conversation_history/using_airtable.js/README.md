@@ -66,7 +66,7 @@ Finally, let's setup this script to run locally. You can later deploy this as a 
   - Loads dependencies, helper functions, and configuration variables
   - Initializes API clients for the Airtable and Slack APIs
   - Retrieves Slack messages (both "parent" and "threaded replies") from the Slack API and transforms the objects to be flat and suitable for our base template (setup section A)
-  - Retrieves all existing records in the Airtable base and creates a mapping of the unqiue field's value to the existing record ID for later updating
+  - Retrieves all existing records in the Airtable base and creates a mapping of the unique field's value to the existing record ID for later updating
   - First loops through each of the parent messages, determining if a new record needs to be created or an existing record updated. This step then repeats for all threaded replies.
     - Note: This example is more complicated than the generic examples as we first loop through all parent Slack messages to update-or-create them and then loop through all threaded replies so that they can be properly associated them with the correct parent Slack message. This can be observed in [index.js](./index.js); look for `// First, upsert all parent messages, and then upsert all threaded replies`
 - `*_helpers.js`
