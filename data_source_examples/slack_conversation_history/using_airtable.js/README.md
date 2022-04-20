@@ -23,7 +23,7 @@ This section will walk you through setting up three components:
 First, create a table in a base you have creator-level access to. You can do so by creating a copy of [this sample table]([from here](https://airtable.com/shrB2653wGPc4KwoZ)) by selecting the "Use data" button in the top right corner of the page (recommended).
 
 Alternatively, you can create a table with the following fields:
-| **Field Name** 	| **Airtable Field Type** 	| **Description/Notes** 	|
+| **Field Name** 	| [**Airtable Field Type**](https://support.airtable.com/hc/en-us/articles/360055885353-Field-types-overview) 	| **Description/Notes** 	|
 |---	|---	|---	|
 | Channel ID + Message Timestamp 	| Single line text 	| Primary field and unique field. Though Airtable will not force values to be unique, our script will by using this field as the AIRTABLE_UNIQUE_FIELD_NAME 	|
 | Channel ID 	| Single line text 	| Slack channel ID 	|
