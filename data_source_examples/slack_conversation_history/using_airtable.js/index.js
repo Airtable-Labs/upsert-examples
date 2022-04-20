@@ -24,13 +24,13 @@ const convertSlackMessageToAirtableRecord = function (msg) {
   return {
     [AIRTABLE_UNIQUE_FIELD_NAME]: `${SLACK_CHANNEL_ID}-${msg.ts}`,
     'Channel ID': SLACK_CHANNEL_ID,
-    'TS': msg.ts,
+    'Timestamp': msg.ts,
     'Type': msg.type,
     'Subtype': msg.subtype,
     'Slack User ID': msg.user,
     'Message Text': msg.text,
     'Reply Count': msg.reply_count,
-    'Last Edited TS': msg.edited ? msg.edited.ts : null,
+    'Last Edited Timestamp': msg.edited ? msg.edited.ts : null,
     'Full Message Payload (JSON)': JSON.stringify(msg, null, 2),
     // If msg.thread_ts exists and is different from msg.ts, then this is a threaded message; set the parent message accordingly:
     'Parent Message': (msg.thread_ts && (msg.thread_ts != msg.ts)) ? [`${SLACK_CHANNEL_ID}-${msg.thread_ts}`] : null,
