@@ -1,6 +1,6 @@
 # Bring Slack Conversation History into Airtable
 
-This code example can be used to import messages from a Slack conversation (public or private channel, DM, or multi-party DM) into an Airtable table. You can also schedule this script to run on a recurring to keep your table in Airtable up to date with the new messages from Slack.
+This code example can be used to import messages from a Slack conversation (public or private channel, DM, or multi-party DM) into an Airtable table. You can also schedule this script to run on a recurring schedule to keep your table in Airtable up to date with new messages from Slack.
 
 This code example is based on [the generic airtable.js upsert example](.../../../../../javascript/using_airtable.js/) and uses [`airtable.js`](https://github.com/airtable/airtable.js) to interact with the Airtable REST API and [`@slack/web-api`](https://slack.dev/node-slack-sdk/web-api) to interact with Slack's API.
 
@@ -20,10 +20,10 @@ This section will walk you through setting up three components:
 
 ### A. Airtable Base Setup
 
-First, create a table in a base you have creator-level access to and create a table with the following fields: 'Channel ID + TS' (Single line text), 'Channel ID' (Single line text), 'TS' (Single line text), 'Last Edited TS' (Single line text), 'Type' (Single line text), and 'Subtype' (Single line text), 'Slack User ID' (Single line text), 'Message text' (Long text), 'Reply Count' (Number), 'Parent Message' (self-linking Linked Record), and 'Full Message Payload (JSON)' (Long text).
+First, create a table in a base you have creator-level access to. You can do so by creating a copy of [this sample table]([from here](https://airtable.com/shrB2653wGPc4KwoZ)) by selecting the "Use data" button in the top right corner of the page (recommended).
 
+Alternatively, you can create a table with the following fields: 'Channel ID + TS' (Single line text), 'Channel ID' (Single line text), 'TS' (Single line text), 'Last Edited TS' (Single line text), 'Type' (Single line text), and 'Subtype' (Single line text), 'Slack User ID' (Single line text), 'Message text' (Long text), 'Reply Count' (Number), 'Parent Message' (self-linking Linked Record), and 'Full Message Payload (JSON)' (Long text).
 - You may also want to add a formula field named 'TS (Human Readable)' with the formula `DATETIME_PARSE({TS}, 'X')` and another named 'Parent or Thread?' with the formula `IF({Parent Message},"Threaded reply","Parent message")`.
-- You can create a copy of a sample table with these fields [from here](https://airtable.com/shrB2653wGPc4KwoZ) by selecting "Use data" in the top right corner.
 - If you choose other field names, be sure to update the code in [index.js](./index.js) in the `convertSlackMessageToAirtableRecord` function.
 
 ### B. Slack App Setup
