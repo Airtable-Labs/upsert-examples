@@ -93,7 +93,7 @@ scheduled task on a server or cloud function.
 4. Trigger the script to execute by running `npm run sync`
 5. Records in the specified Airtable base’s tables should be created/updated.
 
-### Key Files and Their Contents
+## Key Files and Their Contents
 
 - [`index.js`](index.js) is the main code file which is executed when
   `npm run sync` is run. At a high level, it performs the following:
