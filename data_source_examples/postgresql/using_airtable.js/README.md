@@ -50,8 +50,8 @@ is" basis and provided without express or implied warranties of any kind.
     authenticate to your Postgres database
   - `POSTGRES_TABLE_PREFIX_IF_ANY` - the prefix to your Postgres database. When
     using the example links in Step A, this value should be
-    `"marks/example_project_management".` based on the way @bitdotioinc
-    namespaces tables.
+    `"marks/example_project_management".` based on the way
+    [bit.io](https://bit.io/) namespaces tables.
 
 ## Setup steps
 
