@@ -75,10 +75,9 @@ The table below shows the three tables' Postgres columns and Airtable fields.
 | tasks          | completed             | BOOLEAN                  | Checkbox                                                                                                    |                                                                              |
 | tasks          | estimated_days        | DOUBLE PRECISION         | Number                                                                                                      |                                                                              |
 
-The fields listed as _Airtable only field. Should not exist as a column in
-Postgres database._ do not need to be manually created in Airtable either. When
-you create linked record fields, the corresponding field will be automatically
-added to the table you are linking to.
+The fields listed as "⚠️ Airtable only fields" do not need to be manually
+created in Airtable. When you create linked record fields in Airtable, the
+corresponding field will be automatically added to the table you are linking to.
 
 ### B. Configuring and Running this Script
 
