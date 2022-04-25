@@ -71,9 +71,10 @@ Airtable and Postgres are identical with the exception of linked record fields
 For example, the Postgres database this example was based on can be viewed on
 bit.io [here](https://bit.io/marks/example_project_management).
 
-By the way: Bit.io allows you to host a database and share it with others. You
-can try this code example by viewing the link, clicking 'Connect', signing up,
-and using the Postgres connection string from the 'Connect' UI.
+By the way: Bit.io allows you to share database with others without having to
+handle any infrastructure yourelf. You can try this code example with the
+aforementioned example database by viewing the link above, clicking 'Connect',
+signing up, and using the Postgres connection string from the 'Connect' UI.
 
 The database has three tables: `clients`, `projects`, and `tasks`. Each table
 has a `name` field. Projects belong to one client (`projects.client_name` <=>
