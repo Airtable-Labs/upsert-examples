@@ -18,7 +18,7 @@ This section will walk you through setting up three components:
 
 - A. An Airtable base where this example script will store messages from the Slack conversation you specify
 - B. A custom Slack app and retrieving your Slack bot token, allowing you to retrieve messages from Slack
-- C. This script (which will pull messages from the Slack converstion, compare it to existing records in you base, and create-or-update records in your base so they mirror the latest messages in Slack)
+- C. This script (which will pull messages from the Slack converstion, compare it to existing records in your base, and create-or-update records in your base so they mirror the latest messages in Slack)
 
 ### A. Airtable Base Setup
 
