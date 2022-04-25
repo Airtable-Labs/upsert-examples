@@ -121,8 +121,8 @@ Now, let’s setup this script to run locally. You can later deploy this as a
 scheduled task on a server or cloud function.
 
 1. Clone/unzip code
-2. Copy `.env.example` to `.env` and populate values (see below for details on
-   each environment variable)
+2. Copy `.env.example` to `.env` and populate values (see description of
+   `.env.example` above for details on each environment variable)
 3. Install node dependencies including
    [`airtable.js`](https://github.com/airtable/airtable.js) and
    [`pg`](https://node-postgres.com/)
