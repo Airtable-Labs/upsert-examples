@@ -47,6 +47,8 @@ import the rows into an Airtable base that looks like
 can copy into your own Airtable workspace using the "Copy base" button in the
 top right.
 
+[A screenshot showing the base schema for the Airtable base along with which fields should _not_ exist in the Postgres schema can be found here.](./assets/airtable_base_schema.png)
+
 The table below shows the three tables' Postgres columns and Airtable fields.
 (*=)Pay special attention to the **Notes** column.
 
