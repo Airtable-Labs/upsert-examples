@@ -92,8 +92,6 @@ top right.
 The table below shows the three tables' Postgres columns and Airtable fields.
 (*=)Pay special attention to the **Notes** column.
 
----
-
 | **Table Name** | **Column/Field Name** | **Postgres Column Type** | [**Airtable Field Type**](https://support.airtable.com/hc/en-us/articles/360055885353-Field-types-overview) | **Notes**                                                                 |
 | -------------- | --------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | clients        | name                  | VARCHAR                  | Single line text                                                                                            | Airtable primary field.                                                   |
@@ -111,8 +109,6 @@ The table below shows the three tables' Postgres columns and Airtable fields.
 | tasks          | project_name          | VARCHAR                  | Linked record to projects table                                                                             |                                                                           |
 | tasks          | completed             | BOOLEAN                  | Checkbox                                                                                                    |                                                                           |
 | tasks          | estimated_days        | DOUBLE PRECISION         | Number                                                                                                      |                                                                           |
-
----
 
 The fields listed as _Airtable only field. Should not exist as a column in
 Postgres database._ do not need to be manually created in Airtable either. When
