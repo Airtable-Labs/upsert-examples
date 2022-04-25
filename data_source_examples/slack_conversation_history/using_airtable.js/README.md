@@ -66,7 +66,7 @@ Finally, let's setup this script to run locally. You can later deploy this as a 
  
 ### Key Files and Their Contents
 
-- [`index.js`](index.js) is the main code file which is executed when `npm start` is run. At a high level, it performs the following:
+- [`index.js`](index.js) is the main code file which is executed when `npm run sync` is run. At a high level, it performs the following:
   - Loads dependencies, helper functions, and configuration variables
   - Initializes API clients for the Airtable and Slack APIs
   - Retrieves Slack messages (both "parent" and "threaded replies") from the Slack API and transforms the objects to be flat and suitable for our base template (setup section A)
