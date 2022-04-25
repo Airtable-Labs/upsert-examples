@@ -18,6 +18,41 @@ is" basis and provided without express or implied warranties of any kind.
 
 ---
 
+### Key Files and Their Contents
+
+- [`index.js`](index.js) is the main code file which is executed when
+  `npm run sync` is run. At a high level, it performs the following:
+  - Loads dependencies, helper functions, and configuration variables
+  - Initializes clients for the Airtable API and PostgreSQL
+  - For each table specified in the `TABLE_NAMES_AS_CSV_STRING` environment
+    variable...
+    - Retrieves all rows from Postgres (`SELECT * FROM ...`)
+    - Retrieves all existing records in the Airtable base and creates a mapping
+      of the unique field’s value to the existing record ID for later updating
+    - Loops through each of the rows from Postgres, determining if a new record
+      needs to be created in Airtable or an existing Airtable record should be
+      updated.
+- [`airtable_helpers.js`](airtable_helpers.js) is referenced by
+  [`index.js`](index.js) and contains helper functions to for batching Airtable
+  record actions.
+- [`.env.example`](.env.example) is an example file template to follow for your
+  own `.env` file. The environment variables supported are:
+  - `AIRTABLE_API_KEY` -
+    [your Airtable API key](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-);
+    it will always start with `key`
+  - `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base’s
+    API docs from https://airtable.com/api. This will always start with `app`
+  - `AIRTABLE_PRIMARY_FIELD_NAME` - the name of your Airtable tables' primary
+    field. Should always be `name` when using the example links in step A.
+  - `TABLE_NAMES_AS_CSV_STRING` - A comma separated list of tables, for example
+    `clients,projects,tasks`
+  - `POSTGRES_CONNECTION_STRING` - the Postgres connection string to connect and
+    authenticate to your Postgres database
+  - `POSTGRES_TABLE_PREFIX_IF_ANY` - the prefix to your Postgres database. When
+    using the example links in Step A, this value should be
+    `"marks/example_project_management".` based on the way @bitdotioinc
+    namespaces tables.
+
 ## Setup steps
 
 This section will walk you through setting up three components:
@@ -34,9 +69,14 @@ Airtable and Postgres are identical with the exception of linked record fields
 (see the screenshot link and table below for details)
 
 For example, the Postgres database this example was based on can be viewed on
-@bitdotioinc [here](https://bit.io/marks/example_project_management). The
-database has three tables: `clients`, `projects`, and `tasks`. Each table has a
-`name` field. Projects belong to one client (`projects.client_name` <=>
+bit.io [here](https://bit.io/marks/example_project_management).
+
+By the way: Bit.io allows you to host a database and share it with others. You
+can try this code example by viewing the link, clicking 'Connect', signing up,
+and using the Postgres connection string from the 'Connect' UI.
+
+The database has three tables: `clients`, `projects`, and `tasks`. Each table
+has a `name` field. Projects belong to one client (`projects.client_name` <=>
 `clients.name`) and tasks belong to one project (`tasks.project_name` <=>
 `projects.name`). Exported CSVs of each of the three tables can be found in the
 [`assets`](assets/) folder.
@@ -92,38 +132,3 @@ scheduled task on a server or cloud function.
    [`pg`](https://node-postgres.com/)
 4. Trigger the script to execute by running `npm run sync`
 5. Records in the specified Airtable base’s tables should be created/updated.
-
-### Key Files and Their Contents
-
-- [`index.js`](index.js) is the main code file which is executed when
-  `npm run sync` is run. At a high level, it performs the following:
-  - Loads dependencies, helper functions, and configuration variables
-  - Initializes clients for the Airtable API and PostgreSQL
-  - For each table specified in the `TABLE_NAMES_AS_CSV_STRING` environment
-    variable...
-    - Retrieves all rows from Postgres (`SELECT * FROM ...`)
-    - Retrieves all existing records in the Airtable base and creates a mapping
-      of the unique field’s value to the existing record ID for later updating
-    - Loops through each of the rows from Postgres, determining if a new record
-      needs to be created in Airtable or an existing Airtable record should be
-      updated.
-- [`airtable_helpers.js`](airtable_helpers.js) is referenced by
-  [`index.js`](index.js) and contains helper functions to for batching Airtable
-  record actions.
-- [`.env.example`](.env.example) is an example file template to follow for your
-  own `.env` file. The environment variables supported are:
-  - `AIRTABLE_API_KEY` -
-    [your Airtable API key](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-);
-    it will always start with `key`
-  - `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base’s
-    API docs from https://airtable.com/api. This will always start with `app`
-  - `AIRTABLE_PRIMARY_FIELD_NAME` - the name of your Airtable tables' primary
-    field. Should always be `name` when using the example links in step A.
-  - `TABLE_NAMES_AS_CSV_STRING` - A comma separated list of tables, for example
-    `clients,projects,tasks`
-  - `POSTGRES_CONNECTION_STRING` - the Postgres connection string to connect and
-    authenticate to your Postgres database
-  - `POSTGRES_TABLE_PREFIX_IF_ANY` - the prefix to your Postgres database. When
-    using the example links in Step A, this value should be
-    `"marks/example_project_management".` based on the way @bitdotioinc
-    namespaces tables.
