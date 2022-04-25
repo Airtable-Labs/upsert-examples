@@ -29,9 +29,9 @@ This section will walk you through setting up three components:
 
 ### A. PostgreSQL and Airtable Base Setup
 
-TLDR: This code example assumes that your table names and field names in
-Airtable and Postgres are identical with the exception of linked record fields;
-see the table below*.
+Important: This code example assumes that your table names and field names in
+Airtable and Postgres are identical with the exception of linked record fields
+(see the screenshot link and table below for details)
 
 For example, the Postgres database this example was based on can be viewed on
 @bitdotioinc [here](https://bit.io/marks/example_project_management). The
