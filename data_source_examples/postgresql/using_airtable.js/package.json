@@ -1,0 +1,22 @@
+{
+  "name": "airtable_upsert_postgresql",
+  "version": "1.0.0",
+  "description": "This example shows you can import a PostgreSQL database into Airtable.",
+  "main": "index.js",
+  "homepage": "https://github.com/Airtable-Labs/upsert-examples",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sync": "node index.js"
+  },
+  "keywords": [
+    "airtable",
+    "postgres",
+    "bitdotio"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "airtable": "^0.11.3",
+    "dotenv": "^16.0.0",
+    "pg": "^8.7.3"
+  }
+}

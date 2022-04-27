@@ -1,0 +1,7 @@
+name,completed,estimated_days,project_name
+The first task,False,5.0,New Door brand identity
+Another task,False,2.5,New Door brand identity
+The final task,False,1.0,New Door brand identity
+Research other coffee packaging,False,2.5,Coffee packaging
+Design clamshell case hinge,True,15.0,Lemon headband
+Source battery supplier,True,1.5,Lemon headband
