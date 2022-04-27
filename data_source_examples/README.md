@@ -6,8 +6,8 @@ If you don't see an example for your data source or are looking for data source 
 
 There are currently three data source specific upsert examples available:
 
-- [**PostrgeSQL database**](postgresql/using_airtable.js/) - import rows from multiple PostgreSQL tables into an Airtable base while maintaining relationships
-- [**Slack Conversation History**](slack_conversation_history/using_airtable.js/) - bring messages from a Slack channel into a single Airtable table
+- [**PostrgeSQL database**](postgresql/using_airtable.js/) - import rows from multiple PostgreSQL tables into an Airtable base while maintaining table to table relationships
+- [**Slack Conversation History**](slack_conversation_history/using_airtable.js/) - bring messages from a Slack channel into a single Airtable table 
 - [**Workday Reports**](workday) - leverage Workday's RaaS (reporting as a service) functionality to export data from Workday and import it into Airtable
 
 ---
