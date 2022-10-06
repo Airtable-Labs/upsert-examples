@@ -41,7 +41,7 @@ const TABLES_AND_FIELDS = {
     TABLE_NAME: 'Figma Pages',
     FIELDS: {
       DISPLAY_NAME: 'Name',
-      NODE_RANGE: 'Node Range',
+      FIGMA_FILE_ID_PLUS_NODE_RANGE: 'Figma File ID + Node Range', // because node range by itself is not unique
       LINKED_RECORD_TO_FILE: 'Figma File'
     }
   }
@@ -115,7 +115,7 @@ const TABLES_AND_FIELDS = {
         const inputPageRecordsForFile = figmaPagesForFile.map((p) => {
           return {
             [TABLES_AND_FIELDS.PAGES.FIELDS.DISPLAY_NAME]: p.name,
-            [TABLES_AND_FIELDS.PAGES.FIELDS.NODE_RANGE]: p.id,
+            [TABLES_AND_FIELDS.PAGES.FIELDS.FIGMA_FILE_ID_PLUS_NODE_RANGE]: `${figmaFileId} ${p.id}`, // because node range by itself is not unique
             [TABLES_AND_FIELDS.PAGES.FIELDS.LINKED_RECORD_TO_FILE]: [airtableRecordId]
           }
         })
@@ -129,7 +129,7 @@ const TABLES_AND_FIELDS = {
     // Use upsertRecords helper function to update existing or create new file records
     const airtablePagesTableNameOrId = TABLES_AND_FIELDS.PAGES.TABLE_NAME
     const airtablePagesTable = base.table(airtablePagesTableNameOrId)
-    await upsertRecords(airtablePagesTable, airtablePagesTableNameOrId, TABLES_AND_FIELDS.PAGES.FIELDS.NODE_RANGE, inputPageRecords)
+    await upsertRecords(airtablePagesTable, airtablePagesTableNameOrId, TABLES_AND_FIELDS.PAGES.FIELDS.FIGMA_FILE_ID_PLUS_NODE_RANGE, inputPageRecords)
   }
 
   console.log('\nScript execution complete')
