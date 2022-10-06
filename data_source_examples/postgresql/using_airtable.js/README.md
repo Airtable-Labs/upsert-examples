@@ -22,7 +22,7 @@ is" basis and provided without express or implied warranties of any kind.
 
 This section will walk you through setting up three components:
 
-- A. Your existing (i) Postgres database and (ii) Airable base
+- A. Your existing (i) Postgres database and (ii) Airtable base
 - B. This script (which will `SELECT` rows from the specified Postgres tables,
   compare them to existing records in your base, and create-or-update records in
   your base so they mirror the rows in Postgres)
