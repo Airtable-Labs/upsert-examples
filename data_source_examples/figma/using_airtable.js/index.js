@@ -17,8 +17,9 @@ const base = Airtable.base(AIRTABLE_BASE_ID)
 const { FIGMA_PERSONAL_ACCESS_TOKEN, FIGMA_TEAM_ID, POPULATE_PAGES_TABLE } = process.env
 const figma = Client({ personalAccessToken: FIGMA_PERSONAL_ACCESS_TOKEN })
 
-// Configuration object containing table and field names. Table or field IDs are acceptable too.
-// You do not need to edit this if you did not change table names or fields from the duplicated example base.
+// Configuration object containing table and field names/IDs.
+// By having this object defined, there is one place to update if you modify the template base's schema/naming.
+// (You do not need to edit this if you did not change table names or fields from the duplicated example base.)
 const TABLES_AND_FIELDS = {
   PROJECTS: {
     TABLE_NAME: 'Figma Projects',
@@ -84,6 +85,7 @@ const TABLES_AND_FIELDS = {
         [TABLES_AND_FIELDS.FILES.FIELDS.DISPLAY_NAME]: f.name,
         [TABLES_AND_FIELDS.FILES.FIELDS.FIGMA_ID]: f.key,
         [TABLES_AND_FIELDS.FILES.FIELDS.LINKED_RECORD_TO_PROJECT]: [airtableRecordId],
+        // Sometimes a thumbnail_url is not available from Figma, so populare the Airtable field only when a thumbnail is non-null
         ...(f.thumbnail_url && { [TABLES_AND_FIELDS.FILES.FIELDS.THUMBNAIL]: [{ url: f.thumbnail_url }] })
       }
     })
@@ -107,23 +109,18 @@ const TABLES_AND_FIELDS = {
     for (const [figmaFileId, airtableRecordId] of Object.entries(airtableFileRecordsMappingOfUniqueIdToRecordId)) {
       console.log(`Retrieving Figma page metadata for pages within file ${figmaFileId} which maps to Airtable record ${airtableRecordId}`)
 
-      try {
-        // Fetch file metadata from Figma API
-        const { data: { document: { children: figmaPagesForFile } } } = await figma.file(figmaFileId)
+      // Fetch file metadata from Figma API
+      const { data: { document: { children: figmaPagesForFile } } } = await figma.file(figmaFileId)
 
-        // Format array of pages into Airtable record field-value pairs
-        const inputPageRecordsForFile = figmaPagesForFile.map((p) => {
-          return {
-            [TABLES_AND_FIELDS.PAGES.FIELDS.DISPLAY_NAME]: p.name,
-            [TABLES_AND_FIELDS.PAGES.FIELDS.FIGMA_FILE_ID_PLUS_NODE_RANGE]: `${figmaFileId} ${p.id}`, // because node range by itself is not unique
-            [TABLES_AND_FIELDS.PAGES.FIELDS.LINKED_RECORD_TO_FILE]: [airtableRecordId]
-          }
-        })
-        inputPageRecords.push(...inputPageRecordsForFile)
-      } catch (err) {
-        // This endpoint from Figma's API gives a 500 sometimes
-        console.error('\t!!! Error fetching or processing Figma page metadata')
-      }
+      // Format array of pages into Airtable record field-value pairs
+      const inputPageRecordsForFile = figmaPagesForFile.map((p) => {
+        return {
+          [TABLES_AND_FIELDS.PAGES.FIELDS.DISPLAY_NAME]: p.name,
+          [TABLES_AND_FIELDS.PAGES.FIELDS.FIGMA_FILE_ID_PLUS_NODE_RANGE]: `${figmaFileId} ${p.id}`, // because node range by itself is not unique
+          [TABLES_AND_FIELDS.PAGES.FIELDS.LINKED_RECORD_TO_FILE]: [airtableRecordId]
+        }
+      })
+      inputPageRecords.push(...inputPageRecordsForFile)
     }
 
     // Use upsertRecords helper function to update existing or create new file records
