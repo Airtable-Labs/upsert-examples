@@ -1,4 +1,4 @@
-# Airtable Upsert Example w/ vanilla JS
+# Airtable Upsert Example w/ [Airtable.js](https://github.com/Airtable/airtable.js)
 This example uses [airtable.js](https://github.com/Airtable/airtable.js), Airtable's first-party Node Javascript SDK, to process input records and compare a unique field with existing records in an Airtable base. If the unique value is present in an existing record, the existing record will be updated. If the unique value is not found, a new record will be created.
 
 The example code in this repository assumes your base has a table with the following fields: First Name (Single line text), Last Name (Single line text), Unique ID (Single line text), Job Title (Single line text), and Hire Number (Number). You can create a copy of a sample base with 200 records prepopulated [here](https://airtable.com/shrgakIqrpwtkQL2p).
