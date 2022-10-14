@@ -14,11 +14,11 @@ The software made available from this repository is not supported by Formagrid I
 1. Clone/unzip code
 2. Copy `.env.example` to `.env` and populate values
 3. Install Python dependencies using `pip3 install -r requirements.txt`
-4. (Optional) Modify `inputRecords` in `example.py` with new static values or dynamically fetched values from your source of choice (API, file, etc.)
-5. Run `python3 example.py` to run the script
+4. (Optional) Modify the list of attributes mapped from Frame.io into the `assets` variable in `index.py` to capture the desired metadata
+5. Run `python3 index.py` to run the script
 
 ### Key files and their contents
-- [`example.py`](example.py) is the main code file which is executed when `python3 example.py` is run. At a high level, it performs the following:
+- [`index.py`](index.py) is the main code file which is executed when `python3 index.py` is run. At a high level, it performs the following:
   - Loads dependencies and configuration variables
   - Defines a sample `inputRecords` array which should be modified to reference an external data source
   - Retrieves all existing records in the Airtable base and creates a mapping of the unqiue field's value to the existing record ID for later updating
