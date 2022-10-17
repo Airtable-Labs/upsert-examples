@@ -8,7 +8,6 @@ load_dotenv()
 
 # Configuration variables for Frameio
 FRAME_API_KEY = os.environ['FRAME_API_KEY']
-FRAME_ACCOUNT_ID = os.environ['FRAME_ACCOUNT_ID']
 
 # Initialize Frameio Client
 client = FrameioClient(FRAME_API_KEY)
