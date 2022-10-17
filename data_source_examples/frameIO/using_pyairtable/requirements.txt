@@ -1,5 +1,4 @@
 python-dotenv
 pyairtable
-requests
 typing
 frameioclient
