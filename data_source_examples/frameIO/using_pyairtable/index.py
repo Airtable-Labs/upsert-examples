@@ -76,9 +76,9 @@ print("\n{} records to create".format(len(recordsToCreate)))
 print("{} records to update".format(len(recordsToUpdate)))
 
 # Perform record creation
-Table.batch_create(recordsToCreate)
+Table.batch_create(recordsToCreate, typecast=True)
 
 # Perform record updates on existing records
-Table.batch_update(recordsToUpdate)
+Table.batch_update(recordsToUpdate, typecast=True)
 
 print("\n\nScript execution complete!")

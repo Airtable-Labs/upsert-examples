@@ -4,7 +4,7 @@ If you don't see an example for your data source or are looking for data source 
 
 ---
 
-There are currently four data source specific upsert examples available:
+There are currently several data source specific upsert examples available:
 
 - [**Figma**](figma/using_airtable.js/) - import metadata (name, ID, thumbnail when available) for each of your team's Figma projects, files, and pages into an Airtable base 
 - [**PostrgeSQL database**](postgresql/using_airtable.js/) - import rows from multiple PostgreSQL tables into an Airtable base while maintaining table to table relationships

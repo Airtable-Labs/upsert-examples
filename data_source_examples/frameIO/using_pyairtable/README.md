@@ -15,6 +15,8 @@ The software made available from this repository is not supported by Formagrid I
 ### Local setup
 1. Clone/unzip code
 2. Copy `.env.example` to `.env` and populate values
+  - Explanations of each environment variable is available below
+  - Use [this sample base](https://airtable.com/shrR9RNplr0U9SCM1) which has correctly named fields.
 3. Install Python dependencies using `pip3 install -r requirements.txt`
 4. (Optional) Modify the list of attributes mapped from Frame.io in the `mapAssets` function to capture the desired metadata
 5. Run `python3 index.py` to run the script
@@ -31,7 +33,11 @@ The software made available from this repository is not supported by Formagrid I
   - `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base's API docs from https://airtable.com/api. This will always start with `app`
   - `AIRTABLE_TABLE_ID` - the ID of the table you want to create/update records in; you can find this in the URL of your browser when viewing the table. It will start with `tbl`
   - `AIRTABLE_UNIQUE_FIELD_NAME` - the field name of the field that is used for determining if an existing records exists that needs to be updated (if no record exists, a new one will be created)
-  - `FRAME_API_KEY` - [your Frame.io Developer Token](https://developer.frame.io/app/tokens)
+  - `FRAME_API_KEY` - [your Frame.io Developer Token](https://developer.frame.io/app/tokens). Your Developer token will need the following scopes:
+    - `account.read`
+    - `team.read`
+    - `project.read`
+    - `asset.read`
 
 ### Notes
 - The [pyairtable](https://github.com/gtalarico/pyairtable) and [frameioclient](https://github.com/Frameio/python-frameio-client/tree/556b835503fca776fdb2dceda3ee6d76f2f1121f) handle API rate limiting
