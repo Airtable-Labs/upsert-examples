@@ -2,7 +2,7 @@
 import os
 from pyairtable import Table  # to interact with Airtable REST API
 from dotenv import load_dotenv  # to load .env files with environment variables
-import requests
+from assetScraper import *
 
 # Load .env file
 load_dotenv()
@@ -12,40 +12,23 @@ AIRTABLE_API_KEY = os.environ['AIRTABLE_API_KEY']
 AIRTABLE_BASE_ID = os.environ['AIRTABLE_BASE_ID']
 AIRTABLE_TABLE_ID = os.environ['AIRTABLE_TABLE_ID']
 AIRTABLE_UNIQUE_FIELD_NAME = os.environ['AIRTABLE_UNIQUE_FIELD_NAME']
-FRAME_API_KEY = os.environ['FRAME_API_KEY']
-FRAME_ACCOUNT_ID = os.environ['FRAME_ACCOUNT_ID']
 
-# Function to retreieve 1 page of Frame.io Assets
-def getAssets(pageNumber):
-    url = 'https://api.frame.io/v2/search/assets?account_id='+FRAME_ACCOUNT_ID
-    headers = { 
-        'Authorization': 'Bearer '+FRAME_API_KEY
-    }
-    params = {
-        'page_size': 1000,
-        'page': pageNumber
-    }
+# Call functions from assetScraper.py to gather all assets in the account
+projects = get_projects_from_account(client)
+assets_in_account = scrape_asset_data_from_projects(client, projects)
 
-    r = requests.get(url, headers=headers, params=params)
-    assets = []
-    for x in r.json():
-        assets.append({
-            'Asset ID': x.get('id'),
-            'Name': x.get('name'),
-            'Status': x.get('label')
-        })
-    totalPages = r.headers.get('total-pages')
-    return assets, totalPages
+# Create function to map desired Asset fields to Airtable field names
+def mapAssets(asset):
+    return {
+        'Asset ID': asset.get('id'),
+        'Name': asset.get('name'),
+        'Status': asset.get('label'),
+        'Type': asset.get('type')
+    }
+inputRecords = list(map(mapAssets, assets_in_account))
 
 # Initialize Airtable client
 Table = Table(AIRTABLE_API_KEY, AIRTABLE_BASE_ID, AIRTABLE_TABLE_ID)
-
-# Retrieve assets from Frame.io
-inputRecords, totalPages = getAssets(1)
-if int(totalPages) > 1:
-    for x in range(int(totalPages)-1):
-        newRecords,totalPages = getAssets(x+2)
-        inputRecords.extend(newRecords)
 
 # Retrieve all existing records from the base through the Airtable REST API
 allExistingRecords = Table.all()
