@@ -15,8 +15,8 @@ The software made available from this repository is not supported by Formagrid I
 ### Local setup
 1. Clone/unzip code
 2. Copy `.env.example` to `.env` and populate values
-  - Explanations of each environment variable is available below
-  - Use [this sample base](https://airtable.com/shrR9RNplr0U9SCM1) which has correctly named fields.
+    - Explanations of each environment variable is available below
+    - Use [this sample base](https://airtable.com/shrR9RNplr0U9SCM1) which has correctly named fields.
 3. Install Python dependencies using `pip3 install -r requirements.txt`
 4. (Optional) Modify the list of attributes mapped from Frame.io in the `mapAssets` function to capture the desired metadata
 5. Run `python3 index.py` to run the script
