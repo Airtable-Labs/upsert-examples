@@ -7,11 +7,15 @@ from assetScraper import *
 # Load .env file
 load_dotenv()
 
-# Configuration variables for Airtable
+# Configuration variables for Airtable and Frameio
 AIRTABLE_API_KEY = os.environ['AIRTABLE_API_KEY']
 AIRTABLE_BASE_ID = os.environ['AIRTABLE_BASE_ID']
 AIRTABLE_TABLE_ID = os.environ['AIRTABLE_TABLE_ID']
 AIRTABLE_UNIQUE_FIELD_NAME = os.environ['AIRTABLE_UNIQUE_FIELD_NAME']
+FRAME_API_KEY = os.environ['FRAME_API_KEY']
+
+# Initialize Frameio Client
+client = FrameioClient(FRAME_API_KEY)
 
 # Call functions from assetScraper.py to gather all assets in the account
 projects = get_projects_from_account(client)

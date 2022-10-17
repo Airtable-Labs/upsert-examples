@@ -4,6 +4,8 @@ This code example can be used to update or insert ("upsert") the list of assets 
 
 This code is based on [the generic pyAirtable upsert example]((.../../../../../javascript/using_pyAirtable/)) and uses [pyAirtable](https://github.com/gtalarico/pyairtable) (maintained by our community) to interact with the Airtable REST API and HTTPS Requests to interact with Frame.io.
 
+The assetScraper.py file is based on [Frame.io's asset scaper example](https://github.com/Frameio/python-frameio-client/blob/556b835503fca776fdb2dceda3ee6d76f2f1121f/examples/assets/asset_scraper.py).
+
 ---
 
 The software made available from this repository is not supported by Formagrid Inc (Airtable) or part of the Airtable Service. It is made available on an "as is" basis and provided without express or implied warranties of any kind.
@@ -14,7 +16,7 @@ The software made available from this repository is not supported by Formagrid I
 1. Clone/unzip code
 2. Copy `.env.example` to `.env` and populate values
 3. Install Python dependencies using `pip3 install -r requirements.txt`
-4. (Optional) Modify the list of attributes mapped from Frame.io into the `assets` variable in `index.py` to capture the desired metadata
+4. (Optional) Modify the list of attributes mapped from Frame.io in the `mapAssets` function to capture the desired metadata
 5. Run `python3 index.py` to run the script
 
 ### Key files and their contents
@@ -30,10 +32,9 @@ The software made available from this repository is not supported by Formagrid I
   - `AIRTABLE_TABLE_ID` - the ID of the table you want to create/update records in; you can find this in the URL of your browser when viewing the table. It will start with `tbl`
   - `AIRTABLE_UNIQUE_FIELD_NAME` - the field name of the field that is used for determining if an existing records exists that needs to be updated (if no record exists, a new one will be created)
   - `FRAME_API_KEY` - [your Frame.io Developer Token](https://developer.frame.io/app/tokens)
-  - `FRAME_ACCOUNT_ID` - your Frame.io account ID [that can be retrieved using this endpoint](https://developer.frame.io/api/reference/operation/getMe/)
 
 ### Notes
-- The [pyairtable](https://github.com/gtalarico/pyairtable) handles API rate limiting
+- The [pyairtable](https://github.com/gtalarico/pyairtable) and [frameioclient](https://github.com/Frameio/python-frameio-client/tree/556b835503fca776fdb2dceda3ee6d76f2f1121f) handle API rate limiting
 - The field used for uniqueness does not have to be the primary field.
 - The field name for the unique field is expected to remain consistent. If it changes, update the environment variable
 - Each existing and new record is expected to have a value for the field used for uniqueness. 

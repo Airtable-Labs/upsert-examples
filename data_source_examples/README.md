@@ -10,6 +10,7 @@ There are currently four data source specific upsert examples available:
 - [**PostrgeSQL database**](postgresql/using_airtable.js/) - import rows from multiple PostgreSQL tables into an Airtable base while maintaining table to table relationships
 - [**Slack Conversation History**](slack_conversation_history/using_airtable.js/) - bring messages from a Slack channel into a single Airtable table 
 - [**Workday Reports**](workday) - leverage Workday's RaaS (reporting as a service) functionality to export data from Workday and import it into Airtable
+- [**Frame.io Assets**](frameIO/using_pyairtable/) - import metadata (name, ID, type, status) from your team's Frame.io assets into a table in Airtable
 
 ---
 

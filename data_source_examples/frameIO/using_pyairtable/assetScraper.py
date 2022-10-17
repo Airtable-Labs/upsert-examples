@@ -1,16 +1,18 @@
+###################################
+# This file uses Frameio's asset_scraper.py example from 
+# https://github.com/Frameio/python-frameio-client/blob/556b835503fca776fdb2dceda3ee6d76f2f1121f/examples/assets/asset_scraper.py
+
+# This scraper shows you how to gather assets from
+# a Frame.io account and write to a CSV.
+# Assets are gathered recursively from each
+# team's projects.  Folders, files and version stacks are written to the CSV.
+# Note: Debug statements are left in the file and commented out.
+###################################
+
 import os
 from typing import Dict, List
 from dotenv import load_dotenv
 from frameioclient import FrameioClient
-
-# Load .env file
-load_dotenv()
-
-# Configuration variables for Frameio
-FRAME_API_KEY = os.environ['FRAME_API_KEY']
-
-# Initialize Frameio Client
-client = FrameioClient(FRAME_API_KEY)
 
 # Helper Functions to scrape teams and retrieve all assets
 def get_teams_from_account(client: FrameioClient) -> Dict:
@@ -120,58 +122,3 @@ def scrape_asset_data(
         asset["team_name"] = get_teams_from_account(client)[asset["team_id"]]
 
     return asset_list
-
-
-def flatten_dict(d) -> List[Dict]:
-    """
-    Use this helper functon to flatten a dict holding API response data
-    and namespace the attributes.
-    """
-
-    def expand(key, val):
-        if isinstance(val, dict):
-            return [(key + "." + k, v) for k, v in flatten_dict(val).items()]
-        else:
-            return [(key, val)]
-
-    items = [item for k, v in d.items() for item in expand(k, v)]
-
-    return dict(items)
-
-
-def write_assets_to_csv(asset_list: List[Dict], filename: str) -> None:
-    """
-    Writes assets to assets.csv
-    Any attributes you add to the headers list will automatically be written to the CSV
-    The API returns many attributes so familiarize with the response data!
-    """
-    headers = [
-        "id",
-        "name",
-        "type",
-        "inserted_at",
-        "item_count",
-        "comment_count",
-        "filesize",
-        "shared",
-        "private",
-        "versions",
-        "parent_id",
-        "project_name",
-        "project_id",
-        "team_name",
-        "creator.name",
-        "creator.email",
-    ]
-
-    # Flattening the assets dicts is not necessary but namespaces the CSV headers nicely.
-    flat_assets_list = []
-    for a in asset_list:
-        flat_assets_list.append(flatten_dict(a))
-
-    with open(f"asset_record_for_account_id-{filename}", "w") as f:
-        f_csv = csv.DictWriter(f, headers, extrasaction="ignore")
-        f_csv.writeheader()
-        f_csv.writerows(flat_assets_list)
-
-    return
