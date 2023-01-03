@@ -6,6 +6,7 @@ If you don't see an example for your data source or are looking for data source 
 
 There are currently several data source specific upsert examples available:
 
+- [**Akeneo PIM**](akeneo/using_airtable.js/) - import a list of products and their associated hierarchy (categories, families, etc.) into an Airtable base
 - [**Figma**](figma/using_airtable.js/) - import metadata (name, ID, thumbnail when available) for each of your team's Figma projects, files, and pages into an Airtable base 
 - [**Frame.io Assets**](frameIO/using_pyairtable/) - import metadata (name, ID, type, status) from your team's Frame.io assets into a table in Airtable
 - [**PostrgeSQL database**](postgresql/using_airtable.js/) - import rows from multiple PostgreSQL tables into an Airtable base while maintaining table to table relationships
