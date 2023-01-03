@@ -2,7 +2,7 @@
 
 This code example can be used to update or insert ("upsert") a list of products and their associated information hierarchy (categories, families, etc.) from [Akeneo, a Product Information Management (PIM) solution](https://www.akeneo.com/what-is-a-pim/), account into their own tables in Airtable. This can help you organize your products, their categories, and additional metadata. You can schedule this script to run on a recurring schedule to keep your Airtable base "in sync" with Akeneo.
 
-This code is uses [Axios](https://github.com/axios/axios) to interact with [Akeneo's REST API](https://api.akeneo.com/documentation/introduction.html) and [Airtable.js](https://github.com/airtable/airtable.js) to [upsert records](https://airtable.com/developers/web/api/update-multiple-records) in Airtable. 
+This code uses [Axios](https://github.com/axios/axios) to interact with [Akeneo's REST API](https://api.akeneo.com/documentation/introduction.html) and [Airtable.js](https://github.com/airtable/airtable.js) to [upsert records](https://airtable.com/developers/web/api/update-multiple-records) in Airtable. 
 
 ---
 
