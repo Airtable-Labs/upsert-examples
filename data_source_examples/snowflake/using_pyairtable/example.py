@@ -1,6 +1,5 @@
 import os
 import snowflake.connector
-import pandas as pd
 from pyairtable import Table
 from dotenv import load_dotenv
 
@@ -26,7 +25,7 @@ conn = snowflake.connector.connect(
     account = SNOWFLAKE_ACCOUNT
 )
 
-# Define input variables from Snowflake
+# Retrieve all rows from Snowflake table or view
 cur = conn.cursor()
 cur.execute('select * from '+ SNOWFLAKE_TABLE_OR_VIEW)
 df = cur.fetch_pandas_all()
@@ -74,5 +73,24 @@ Table.batch_create(recordsToCreate)
 
 # Perform record updates on existing records
 Table.batch_update(recordsToUpdate)
+
+# Uncomment the following block of code if you wish to set records in Airtable # that do not exist in
+# your inputRecords dataset. The example code assumes you have a checkbox field named "Inactive"
+# # Create sets of unique ID values for both input and existing records
+# inputRecordsUpsertFieldValues = set([
+#     d[AIRTABLE_UNIQUE_FIELD_NAME] for d in inputRecords])
+# allExistingRecordsUpsertFieldValues = set([
+#     d['fields'][AIRTABLE_UNIQUE_FIELD_NAME] for d in allExistingRecords])
+# # Determine which unique ID values are not present in input records
+# existingRecordsUpsertFieldValuesNotPresentInInputRecords = allExistingRecordsUpsertFieldValues.difference(
+#     inputRecordsUpsertFieldValues)
+# # Create list of dictionaries representing Airtable update record API payloads
+# recordsToUpdateAsInactive = [{'id': upsertFieldValueToExistingRecordId.get(
+#     recordUniqueValue), 'fields': {'Inactive': True}}
+#     for recordUniqueValue in existingRecordsUpsertFieldValuesNotPresentInInputRecords]
+# print("\n{} records to set Inactive=true (unique ID exists in Airtable records but not in input data source)".format(
+#     len(recordsToUpdateAsInactive)))
+# # Perform record updates on existing records that are now considered 'Inactive'
+# Table.batch_update(recordsToUpdateAsInactive)
 
 print("\n\nScript execution complete!")
