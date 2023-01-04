@@ -1,6 +1,6 @@
 # Import Records from Snowflake into Airtable 
 
-This code example can be used to update or insert ("upsert") the list of records from a Snowflake Table or View into Airtable. This example assumes that your column names in Snowflake match your Airtable field names exactly. You can schedule this script to run on a recurring schedule to keep your Airtable base "in sync" with Frame.io.
+This code example can be used to update or insert ("upsert") the list of records from a Snowflake Table or View into Airtable. This example assumes that your column names in Snowflake match your Airtable field names exactly. You can schedule this script to run on a recurring schedule to keep your Airtable base "in sync" with Snowflake.
 
 This code is based on [the generic pyAirtable upsert example]((.../../../../../javascript/using_pyAirtable/)) and uses [pyAirtable](https://github.com/gtalarico/pyairtable) (maintained by our community) to interact with the Airtable REST API and [Snowflake's python connector](https://docs.snowflake.com/en/user-guide/python-connector.html) to interact with Snowflake.
 
@@ -37,7 +37,7 @@ The software made available from this repository is not supported by Formagrid I
 
 
 ### Notes
-- The [pyairtable](https://github.com/gtalarico/pyairtable) and [frameioclient](https://github.com/Frameio/python-frameio-client/tree/556b835503fca776fdb2dceda3ee6d76f2f1121f) handle API rate limiting
+- [pyairtable](https://github.com/gtalarico/pyairtable) handles API rate limiting
 - The field used for uniqueness does not have to be the primary field.
 - The field name for the unique field is expected to remain consistent. If it changes, update the environment variable
 - Each existing and new record is expected to have a value for the field used for uniqueness. 
