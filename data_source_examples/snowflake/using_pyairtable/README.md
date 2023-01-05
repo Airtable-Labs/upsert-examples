@@ -18,7 +18,7 @@ The software made available from this repository is not supported by Formagrid I
 4. Run `python3 query.py` to run the script
 
 ### Key files and their contents
-- [`query.py`](index.py) is the main code file which is executed when `python3 query.py` is run. At a high level, it performs the following:
+- [`query.py`](example.py) is the main code file which is executed when `python3 query.py` is run. At a high level, it performs the following:
   - Loads dependencies and configuration variables
   - Connects to Snowflake using the Snowflake Python Connector
   - Queries all records from the specified Snowflake Table or View and sets this list to the variable `inputRecords`
