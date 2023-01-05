@@ -1,0 +1,21 @@
+{
+  "name": "akeneo-to-airtable-sync",
+  "version": "1.0.0",
+  "description": "This code example can be used to update or insert ('upsert') a list of products and their associated information hierarchy (categories, families, etc.) from Akeneo, a Product Information Management (PIM) solution, account into Airtable.",
+  "main": "index.js",
+  "scripts": {
+    "sync": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "airtable": "^0.11.6",
+    "axios": "^1.2.1",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "standard": "^16.0.3"
+  }
+}
