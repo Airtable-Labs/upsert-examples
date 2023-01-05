@@ -15,10 +15,10 @@ The software made available from this repository is not supported by Formagrid I
 2. Copy `.env.example` to `.env` and populate values
     - Explanations of each environment variable is available below
 3. Install Python dependencies using `pip3 install -r requirements.txt`
-4. Run `python3 query.py` to run the script
+4. Run `python3 example.py` to run the script
 
 ### Key files and their contents
-- [`query.py`](example.py) is the main code file which is executed when `python3 query.py` is run. At a high level, it performs the following:
+- [`example.py`](example.py) is the main code file which is executed when `python3 example.py` is run. At a high level, it performs the following:
   - Loads dependencies and configuration variables
   - Connects to Snowflake using the Snowflake Python Connector
   - Queries all records from the specified Snowflake Table or View and sets this list to the variable `inputRecords`
