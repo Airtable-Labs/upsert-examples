@@ -1,3 +1,2 @@
 pyairtable
 snowflake-connector-python[pandas]
-pandas
