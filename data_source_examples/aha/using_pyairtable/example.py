@@ -17,8 +17,8 @@ AIRTABLE_UNIQUE_FIELD_NAME = os.environ['AIRTABLE_UNIQUE_FIELD_NAME']
 Table = Table(AIRTABLE_API_KEY, AIRTABLE_BASE_ID, AIRTABLE_TABLE_ID)
 
 # Retrieve all features from Aha! account
-endpoint = 'https://'+AHA_ACCOUNT_NAME+'.aha.io/api/v1/features'
-headers = {"Authorization": "Bearer "+AHA_API_KEY}
+endpoint = f'https://{AHA_ACCOUNT_NAME}.aha.io/api/v1/features'
+headers = {'Authorization': f'Bearer {AHA_API_KEY}'}
 
 # Start a session to paginate through multiple API calls
 session = requests.Session()
@@ -37,7 +37,7 @@ def getFeatures():
     return features
 
 features = getFeatures()
-print('All feature retrieved.')
+print(f'All feature retrieved. Count: {len(features)}')
 
 # Map feature details to Airtable field names
 def mapFeatures(feature):
@@ -66,6 +66,7 @@ print('Feature details retrieved')
 
 # Retrieve all existing records from the base through the Airtable REST API
 allExistingRecords = Table.all()
+print(f'All existing records retrieved. Count: {len(allExistingRecords)}')
 
 # Create an object mapping of the primary field to the record ID
 # Remember, it's assumed that the AIRTABLE_UNIQUE_FIELD_NAME field is truly unique
@@ -96,8 +97,8 @@ for inputRecord in inputRecords:
         recordsToCreate.append(inputRecord)
 
 # Read out array sizes
-print("\n{} records to create".format(len(recordsToCreate)))
-print("{} records to update".format(len(recordsToUpdate)))
+print('\n{} records to create'.format(len(recordsToCreate)))
+print('{} records to update'.format(len(recordsToUpdate)))
 
 # Perform record creation
 Table.batch_create(recordsToCreate)
@@ -106,7 +107,7 @@ Table.batch_create(recordsToCreate)
 Table.batch_update(recordsToUpdate)
 
 # Uncomment the following block of code if you wish to set records in Airtable # that do not exist in
-# your inputRecords dataset. The example code assumes you have a checkbox field named "Inactive"
+# your inputRecords dataset. The example code assumes you have a checkbox field named 'Inactive'
 # # Create sets of unique ID values for both input and existing records
 # inputRecordsUpsertFieldValues = set([
 #     d[AIRTABLE_UNIQUE_FIELD_NAME] for d in inputRecords])
@@ -119,9 +120,9 @@ Table.batch_update(recordsToUpdate)
 # recordsToUpdateAsInactive = [{'id': upsertFieldValueToExistingRecordId.get(
 #     recordUniqueValue), 'fields': {'Inactive': True}}
 #     for recordUniqueValue in existingRecordsUpsertFieldValuesNotPresentInInputRecords]
-# print("\n{} records to set Inactive=true (unique ID exists in Airtable records but not in input data source)".format(
+# print('\n{} records to set Inactive=true (unique ID exists in Airtable records but not in input data source)'.format(
 #     len(recordsToUpdateAsInactive)))
 # # Perform record updates on existing records that are now considered 'Inactive'
 # Table.batch_update(recordsToUpdateAsInactive)
 
-print("\n\nScript execution complete!")
+print('\n\nScript execution complete!')

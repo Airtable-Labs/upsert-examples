@@ -27,11 +27,11 @@ The software made available from this repository is not supported by Formagrid I
   - Loops through each record from the `inputRecords` list and determines if an existing record should be updated or a new one should be created
   - In chunks of 10, updates existing and creates new records
 - [`.env.example`](.env.example) is an example file template to follow for your own `.env` file. The environment variables supported are:
-  - `AIRTABLE_API_KEY` - [your Airtable API key or personal access token](https://support.airtable.com/docs/creating-and-using-api-keys-and-access-tokens)
+  - `AIRTABLE_API_KEY` - [your Airtable personal access token](https://support.airtable.com/docs/creating-and-using-api-keys-and-access-tokens)
   - `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base's API docs from https://airtable.com/api. This will always start with `app`
   - `AIRTABLE_TABLE_ID` - the ID of the table you want to create/update records in; you can find this in the URL of your browser when viewing the table. It will start with `tbl`
   - `AIRTABLE_UNIQUE_FIELD_NAME` - the field name of the field that is used for determining if an existing records exists that needs to be updated (if no record exists, a new one will be created)
-  - `AHA_ACCOUNT_NAME` - your Aha.io account name
+  - `AHA_ACCOUNT_NAME` - your Aha.io account name. This should match the first part of the URL when accessing Aha.io that follows the pattern `<youraccountname>.aha.io`
   - `AHA_API_KEY` - your [Aha.io API key](https://www.aha.io/api)
 
 ### Notes
