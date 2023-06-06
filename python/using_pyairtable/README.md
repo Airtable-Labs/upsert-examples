@@ -21,18 +21,17 @@ The software made available from this repository is not supported by Formagrid I
 - [`example.py`](example.py) is the main code file which is executed when `python3 example.py` is run. At a high level, it performs the following:
   - Loads dependencies and configuration variables
   - Defines a sample `inputRecords` array which should be modified to reference an external data source
-  - Retrieves all existing records in the Airtable base and creates a mapping of the unqiue field's value to the existing record ID for later updating
-  - Loops through each record from `inputRecords` array and determines if an existing record should be updated or a new one should be created
   - In chunks of 10, updates existing and creates new records
 - [`.env.example`](.env.example) is an example file template to follow for your own `.env` file. The environment variables supported are:
-  - `AIRTABLE_API_KEY` - [your Airtable API key](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-); it will always start with `key`
+  - `AIRTABLE_API_KEY` - [your Airtable personal access token](https://airtable.com/developers/web/guides/personal-access-tokens); it will always start with `pat`
   - `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base's API docs from https://airtable.com/api. This will always start with `app`
   - `AIRTABLE_TABLE_ID` - the ID of the table you want to create/update records in; you can find this in the URL of your browser when viewing the table. It will start with `tbl`
   - `AIRTABLE_UNIQUE_FIELD_NAME` - the field name of the field that is used for determining if an existing records exists that needs to be updated (if no record exists, a new one will be created)
 
 ### Notes
-- The [pyairtable](https://github.com/gtalarico/pyairtable) handles API rate limiting
+- The [pyairtable](https://github.com/gtalarico/pyairtable) library handles API rate limiting
 - The field used for uniqueness does not have to be the primary field.
+- The field used for uniqueness cannot be a computed field (formula, lookup, rollup)
 - The field name for the unique field is expected to remain consistent. If it changes, update the environment variable
 - Each existing and new record is expected to have a value for the field used for uniqueness. 
 - [Mockaroo](https://www.mockaroo.com/) was used to generate example data used in this example.
