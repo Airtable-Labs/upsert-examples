@@ -67,7 +67,9 @@ is" basis and provided without express or implied warranties of any kind.
 - This code rate-limits itself by sleeping for `AIRTABLE_API_MS_TO_SLEEP`
   milliseconds after each API call in an attempt to remain within Airtable's
   rate limit of 5 requests/second.
-- The field used for uniqueness does not have to be the primary field.
+- The field used for uniqueness does not have to be the primary field. The
+  following field types are supported: number, text, long text, single select,
+  multiple select, and date.
 - The field name for the unique field is expected to remain consistent. If it
   changes, update the environment variable.
 - Each existing and new record is expected to have a value for the field used
