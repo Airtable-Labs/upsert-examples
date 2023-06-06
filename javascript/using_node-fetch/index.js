@@ -8,7 +8,7 @@ const fetch = require('node-fetch')
 const { getAllRecordsFromBase, createMappingOfUniqueFieldToRecordId, actOnRecordsInChunks } = require('./helpers')
 
 // Define variables for base API and default headers
-const { AIRTABLE_API_KEY, AIRTABLE_BASE_ID, AIRTABLE_TABLE_ID, AIRTABLE_UNIQUE_FIELD_NAME, AIRTABLE_API_MS_TO_SLEEP } = process.env
+const { AIRTABLE_API_KEY, AIRTABLE_BASE_ID, AIRTABLE_TABLE_ID, AIRTABLE_UNIQUE_FIELD_NAME_OR_ID, AIRTABLE_API_MS_TO_SLEEP } = process.env
 const baseApiUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_ID}`
 const airtableAuthHeaders = new fetch.Headers({
   Authorization: `Bearer ${AIRTABLE_API_KEY}`,
@@ -41,8 +41,8 @@ const airtableAuthHeaders = new fetch.Headers({
   const existingRecords = await getAllRecordsFromBase(baseApiUrl, airtableAuthHeaders, 100, AIRTABLE_API_MS_TO_SLEEP)
 
   // Create an object mapping of the primary field to the record ID
-  // Remember, it's assumed that the AIRTABLE_UNIQUE_FIELD_NAME field is truly unique
-  const mapOfUniqueIdToExistingRecordId = createMappingOfUniqueFieldToRecordId(existingRecords, AIRTABLE_UNIQUE_FIELD_NAME)
+  // Remember, it's assumed that the AIRTABLE_UNIQUE_FIELD_NAME_OR_ID field is truly unique
+  const mapOfUniqueIdToExistingRecordId = createMappingOfUniqueFieldToRecordId(existingRecords, AIRTABLE_UNIQUE_FIELD_NAME_OR_ID)
 
   // Create two arrays: one for records to be created, one for records to be updated
   const recordsToCreate = []
@@ -51,8 +51,8 @@ const airtableAuthHeaders = new fetch.Headers({
   // For each input record, check if it exists in the existing records. If it does, update it. If it does not, create it.
   console.log(`Processing ${inputRecords.length} input records to determine whether to update or create`)
   for (const inputRecord of inputRecords) {
-    const recordUniqueFieldValue = inputRecord[AIRTABLE_UNIQUE_FIELD_NAME]
-    console.debug(`\tProcessing record w/ '${AIRTABLE_UNIQUE_FIELD_NAME}' === '${recordUniqueFieldValue}'`)
+    const recordUniqueFieldValue = inputRecord[AIRTABLE_UNIQUE_FIELD_NAME_OR_ID]
+    console.debug(`\tProcessing record w/ '${AIRTABLE_UNIQUE_FIELD_NAME_OR_ID}' === '${recordUniqueFieldValue}'`)
     // Check for an existing record with the same unique ID as the input record
     const recordMatch = mapOfUniqueIdToExistingRecordId[recordUniqueFieldValue]
 

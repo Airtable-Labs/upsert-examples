@@ -10,7 +10,7 @@ updated. If the unique value is not found, a new record will be created.
 The example code in this repository assumes your base has a table with the
 following fields: First Name (Single line text), Last Name (Single line text),
 Unique ID (Single line text), Job Title (Single line text), and Hire Number
-(Number). You can create a copy of a sample base with 200 records prepopulated
+(Number). You can create a copy of a sample base with 200 records pre-populated
 [here](https://airtable.com/shrgakIqrpwtkQL2p).
 
 ---
@@ -39,11 +39,9 @@ is" basis and provided without express or implied warranties of any kind.
   - Loads dependencies, [`helpers.js`](helpers.js), and configuration variables
   - Defines a sample `inputRecords` array which should be modified to reference
     an external data source
-  - Retrieves all existing records in the Airtable base and creates a mapping of
-    the unqiue field's value to the existing record ID for later updating
-  - Loops through each record from `inputRecords` array and determines if an
-    existing record should be updated or a new one should be created
-  - In chunks of 10, updates existing and creates new records
+  - In chunks of 10, sends records to
+    [Airtable's update multiple records endpoint](https://airtable.com/developers/web/api/update-multiple-records#upserts),
+    configured to upsert on the `AIRTABLE_UNIQUE_FIELD_NAME_OR_ID` field
 - [`helpers.js`](helpers.js) is referenced by [`index.js`](index.js) and
   contains helper functions to call the
   [Airtable REST API](https://support.airtable.com/hc/en-us/articles/203313985-Public-REST-API),
@@ -58,23 +56,24 @@ is" basis and provided without express or implied warranties of any kind.
   - `AIRTABLE_TABLE_ID` - the ID of the table you want to create/update records
     in; you can find this in the URL of your browser when viewing the table. It
     will start with `tbl`
-  - `AIRTABLE_UNIQUE_FIELD_NAME` - the field name of the field that is used for
-    determining if an existing records exists that needs to be updated (if no
-    record exists, a new one will be created)
+  - `AIRTABLE_UNIQUE_FIELD_NAME_OR_ID` - the field name or ID of the field that
+    is used for determining if an existing records exists that needs to be
+    updated (if no record exists, a new one will be created)
   - `AIRTABLE_API_MS_TO_SLEEP` - the number of milliseconds for the code to wait
     after each API call. Used for self rate-limiting.
 
 ### Notes
 
-- This code rate-limits itself by sleeping 150ms after each API call. Airtable
-  rate limit is 5 requests/second.
+- This code rate-limits itself by sleeping for `AIRTABLE_API_MS_TO_SLEEP`
+  milliseconds after each API call in an attempt to remain within Airtable's
+  rate limit of 5 requests/second.
 - The field used for uniqueness does not have to be the primary field.
 - The field name for the unique field is expected to remain consistent. If it
-  changes, update the environment variable
+  changes, update the environment variable.
 - Each existing and new record is expected to have a value for the field used
   for uniqueness.
 - As implemented, `PATCH` will be used for record updates. See the note at the
-  top of the `actOnRecordsInChunks` function in [`helpers.js`](helpers.js) to
+  top of the `upsertRecordsInChunks` function in [`helpers.js`](helpers.js) to
   determine if `PUT` would be more suitable for your use case
 - [Mockaroo](https://www.mockaroo.com/) was used to generate example data used
   in this example.
