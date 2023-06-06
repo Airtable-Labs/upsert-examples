@@ -29,7 +29,7 @@ The software made available from this repository is not supported by Formagrid I
   - `AIRTABLE_UNIQUE_FIELD_NAME` - the field name of the field that is used for determining if an existing records exists that needs to be updated (if no record exists, a new one will be created)
 
 ### Notes
-- The [pyairtable](https://github.com/gtalarico/pyairtable) handles API rate limiting
+- The [pyairtable](https://github.com/gtalarico/pyairtable) library handles API rate limiting
 - The field used for uniqueness does not have to be the primary field.
 - The field used for uniqueness cannot be a computed field (formula, lookup, rollup)
 - The field name for the unique field is expected to remain consistent. If it changes, update the environment variable
