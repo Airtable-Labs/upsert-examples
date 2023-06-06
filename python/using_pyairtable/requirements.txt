@@ -1,2 +1,2 @@
 python-dotenv
-pyairtable
+pyairtable>=1.5.0
