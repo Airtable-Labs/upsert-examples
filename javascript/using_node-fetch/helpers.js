@@ -11,7 +11,7 @@ const chunkArray = function (arrayToChunk, chunkSize = 10) {
 // Helper function to upsert a chunk of records
 //   method="PUT" -> upsert (insert-or-update) records, will clear all unspecified cell values
 //   method="PATCH" -> upsert (insert-or-update) records, will only update the fields you specify, leaving the rest as they were
-const upsertRecordsInChunks = async function (baseApiUrl, headers, records, fieldsToMergeOn,  msToSleep = 150, method = "PATCH") {
+const upsertRecordsInChunks = async function (baseApiUrl, headers, records, fieldsToMergeOn, msToSleep = 150, method = 'PATCH') {
   console.log(`\nupsert'ing ${records.length} records at ${method} ${baseApiUrl}`)
   const arrayOfChunks = chunkArray(records)
   for (const chunkOfRecords of arrayOfChunks) {
