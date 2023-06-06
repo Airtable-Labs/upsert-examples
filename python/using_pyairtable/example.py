@@ -35,15 +35,10 @@ inputRecords = [
 ]
 
 # Format inputRecords to include a fields object
-def formatRecords (records):
-    formattedRecords = []
-    for record in records:
-        formattedRecords.append( 
-            dict(fields=record))
-    return formattedRecords
-
-recordsToUpsert = formatRecords(inputRecords)
-print(recordsToUpsert)
+recordsToUpsert = []
+for record in inputRecords:
+    recordsToUpsert.append( 
+        dict(fields=record))
 
 # Read out array sizes
 print(f'{len(recordsToUpsert)} records to upsert.')
