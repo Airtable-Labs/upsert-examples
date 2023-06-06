@@ -44,6 +44,6 @@ for record in inputRecords:
 print(f'{len(recordsToUpsert)} records to upsert.')
 
 # Perform record upsert
-Table.batch_upsert(recordsToUpsert, ['Unique ID'])
+Table.batch_upsert(recordsToUpsert, [AIRTABLE_UNIQUE_FIELD_NAME])
 
 print("\n\nScript execution complete!")
