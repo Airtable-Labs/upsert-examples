@@ -3,9 +3,11 @@
 This example uses minimal external dependencies (only
 [dotenv](https://www.npmjs.com/package/dotenv) and
 [node-fetch](https://www.npmjs.com/package/node-fetch)) to process input records
-and compare a unique field with existing records in an Airtable base. If the
-unique value is present in an existing record, the existing record will be
-updated. If the unique value is not found, a new record will be created.
+and call
+[Airtable's update multiple records endpoint](https://airtable.com/developers/web/api/update-multiple-records#upserts)
+to upsert (insert-or-update) a record based on a unique field. If the unique
+value is present in an existing record, the existing record will be updated. If
+the unique value is not found, a new record will be created.
 
 The example code in this repository assumes your base has a table with the
 following fields: First Name (Single line text), Last Name (Single line text),
