@@ -19,66 +19,29 @@ Table = Table(AIRTABLE_API_KEY, AIRTABLE_BASE_ID, AIRTABLE_TABLE_ID)
 inputRecords = [
     # Existing person in the table, if using the sample data linked to in the README
     {
-        'First Name': 'Juliette',
-        'Last Name': 'Schimmang',
-        'Unique ID': '16a05ea5-7bbd-4353-bc25-878a2245835e',
-        'Job Title': 'Account Executive II'
+        "fields": {
+            'First Name': 'Juliette',
+            'Last Name': 'Schimmang',
+            'Unique ID': '16a05ea5-7bbd-4353-bc25-878a2245835e',
+            'Job Title': 'Account Executive II'
+        }
     },
     # New user to be added to the table
     {
-        'First Name': 'Marsha',
-        'Last Name': 'Rickeard',
-        'Unique ID': 'bf68da9d-805b-4117-90dc-d54eb46db19f',
-        'Job Title': 'CTO',
-        'Hire Number': 201
+        "fields": {
+            'First Name': 'Marsha',
+            'Last Name': 'Rickeard',
+            'Unique ID': 'bf68da9d-805b-4117-90dc-d54eb46db19f',
+            'Job Title': 'CTO',
+            'Hire Number': 201
+        }
     }
 ]
 
-# Retrieve all existing records from the base through the Airtable REST API
-allExistingRecords = Table.all()
-print('{} existing records found'.format(len(allExistingRecords)))
-
-# Create an object mapping of the primary field to the record ID
-# Remember, it's assumed that the AIRTABLE_UNIQUE_FIELD_NAME field is truly unique
-upsertFieldValueToExistingRecordId = {
-    existingRecord['fields'].get(AIRTABLE_UNIQUE_FIELD_NAME): existingRecord['id'] for existingRecord in allExistingRecords
-}
-
-# Create two arrays: one for records to be created, one for records to be updated
-recordsToCreate = []
-recordsToUpdate = []
-
-# For each input record, check if it exists in the existing records. If it does, update it. If it does not, create it.
-print('\nProcessing {} input records to determine whether to update or create'.format(
-    len(inputRecords)))
-for inputRecord in inputRecords:
-    recordUniqueValue = inputRecord.get(AIRTABLE_UNIQUE_FIELD_NAME, None)
-    print('\tProcessing record w / \'{}\' === \'{}\''.format(
-        AIRTABLE_UNIQUE_FIELD_NAME, recordUniqueValue))
-
-    existingRecordIdBasedOnUpsertFieldValueMaybe = upsertFieldValueToExistingRecordId.get(
-        recordUniqueValue)
-
-    # and if the upsert field value matches an existing one...
-    if existingRecordIdBasedOnUpsertFieldValueMaybe:
-        # Add record to list of records to update
-        print('\t\tExisting record w / ID {} found; adding to recordsToUpdate'.format(
-            existingRecordIdBasedOnUpsertFieldValueMaybe))
-        recordsToUpdate.append(
-            dict(id=existingRecordIdBasedOnUpsertFieldValueMaybe, fields=inputRecord))
-    else:
-        # Otherwise, add record to list of records to create
-        print('\t\tNo existing records match; adding to recordsToCreate')
-        recordsToCreate.append(inputRecord)
-
 # Read out array sizes
-print("\n{} records to create".format(len(recordsToCreate)))
-print("{} records to update".format(len(recordsToUpdate)))
+print(f'{len(inputRecords)} records to upsert.')
 
-# Perform record creation
-Table.batch_create(recordsToCreate)
-
-# Perform record updates on existing records
-Table.batch_update(recordsToUpdate)
+# Perform record upsert
+Table.batch_upsert(inputRecords, ['Unique ID'])
 
 print("\n\nScript execution complete!")
