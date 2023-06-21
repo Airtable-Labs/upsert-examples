@@ -1,6 +1,6 @@
 {
   "name": "airtable_upsert_using_node-fetch",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An example of how to upsert Airtable data using node-fetch",
   "main": "index.js",
   "scripts": {
@@ -12,10 +12,10 @@
   "author": "mark.silverberg@airtable.com",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^10.0.0",
-    "node-fetch": "^2.6.7"
+    "dotenv": "^16.1.4",
+    "node-fetch": "^2.6.11"
   },
   "devDependencies": {
-    "standard": "^16.0.3"
+    "standard": "^17.1.0"
   }
 }
