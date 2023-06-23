@@ -24,12 +24,13 @@ The software made available from this repository is not supported by Formagrid I
 - [`index.js`](index.js) is the main code file which is executed when `npm start` is run. At a high level, it performs the following:
   - Loads dependencies, [`helpers.js`](helpers.js), and configuration variables
   - Defines a sample `inputRecords` array which should be modified to reference an external data source
-  - Retrieves all existing records in the Airtable base and creates a mapping of the unqiue field's value to the existing record ID for later updating
-  - Loops through each record from `inputRecords` array and determines if an existing record should be updated or a new one should be created
+  - In chunks of 10, sends records to
+    [Airtable's update multiple records endpoint](https://airtable.com/developers/web/api/update-multiple-records#upserts),
+    configured to upsert on the `AIRTABLE_UNIQUE_FIELD_NAME_OR_ID` field
   - In chunks of 10, updates existing and creates new records
-- [`helpers.js`](helpers.js) is referenced by [`index.js`](index.js) and contains helper functions to for batching record actions.
+- [`helpers.js`](helpers.js) is referenced by [`index.js`](index.js) and contains helper functions for batching record actions.
 - [`.env.example`](.env.example) is an example file template to follow for your own `.env` file. The environment variables supported are:
-  - `AIRTABLE_API_KEY` - [your Airtable API key](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-); it will always start with `key`
+  - `AIRTABLE_API_KEY` - [your Airtable API key](https://airtable.com/developers/web/guides/personal-access-tokens); it will always start with `pat`
   - `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base's API docs from https://airtable.com/api. This will always start with `app`
   - `AIRTABLE_TABLE_ID` - the ID of the table you want to create/update records in; you can find this in the URL of your browser when viewing the table. It will start with `tbl`
   - `AIRTABLE_UNIQUE_FIELD_NAME_OR_ID` - the field name of the field that is used for determining if an existing records exists that needs to be updated (if no record exists, a new one will be created)
@@ -42,6 +43,5 @@ The software made available from this repository is not supported by Formagrid I
 - The field name for the unique field is expected to remain consistent. If it
   changes, update the environment variable.
 - Each existing and new record is expected to have a value for the field used
-  for uniqueness.
-- Each existing and new record is expected to have a value for the field used for uniqueness. 
+  for uniqueness. 
 - [Mockaroo](https://www.mockaroo.com/) was used to generate example data used in this example.
