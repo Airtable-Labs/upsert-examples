@@ -24,4 +24,3 @@ const getMessages = async function (client, apiMethod, params, data = []) {
 module.exports = {
   getMessages
 }
-
