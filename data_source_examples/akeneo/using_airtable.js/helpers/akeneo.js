@@ -13,8 +13,8 @@ const getInitialToken = async (akeneoClient, clientId, clientSecret, username, p
       grant_type: 'password'
     })
   }
-  const initiaAuthRequest = await akeneoClient(initialAuthRequestBody)
-  return initiaAuthRequest.data
+  const initialAuthRequest = await akeneoClient(initialAuthRequestBody)
+  return initialAuthRequest.data
 }
 
 const getAll = async (akeneoClient, initialPath) => {
