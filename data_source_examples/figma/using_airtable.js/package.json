@@ -1,6 +1,6 @@
 {
   "name": "airtable_upsert_figma",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "This example shows you can import a list of Figma projects, files, and pages into Airtable.",
   "main": "index.js",
   "homepage": "https://github.com/Airtable-Labs/upsert-examples",
