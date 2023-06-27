@@ -14,7 +14,7 @@ const upsertRecordsInChunks = async function (table, records, fieldsToMergeOn) {
   for (const chunkOfRecords of arrayOfChunks) {
     console.log(`\tProcessing batch of ${chunkOfRecords.length} records`)
     try {
-      await table.update(chunkOfRecords, { performUpsert: { fieldsToMergeOn } })
+      await table.update(chunkOfRecords, { performUpsert: { fieldsToMergeOn }, typecast: true })
     } catch (error) {
       console.error(`Error occurred while upserting records: ${error.message}`)
     }
