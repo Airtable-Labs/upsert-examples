@@ -56,11 +56,16 @@ is" basis and provided without express or implied warranties of any kind.
   own `.env` file. The environment variables expected are:
   - `AIRTABLE_API_KEY` -
     [your Airtable API personal access token](https://support.airtable.com/docs/creating-and-using-api-keys-and-access-tokens)
+    with the
+    [`data.records:write`](https://airtable.com/developers/web/api/scopes#data-records-write)
+    scope and access to the base below
   - `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base's
     API docs from https://airtable.com/api. This will always start with `app`
-  - `AIRTABLE_PRODUCTS_TABLE`, `AIRTABLE_CATEGORIES_TABLE`,
-    `AIRTABLE_FAMILIES_TABLE`, `AIRTABLE_ATTRIBUTES_TABLE` - the table ID or
-    name of the respective table in Airtable; these tables must already exist
+  - `AIRTABLE_PRODUCTS_TABLE_ID_OR_NAME`,
+    `AIRTABLE_CATEGORIES_TABLE_ID_OR_NAME`,
+    `AIRTABLE_FAMILIES_TABLE_ID_OR_NAME`,
+    `AIRTABLE_ATTRIBUTES_TABLE_ID_OR_NAME` - the table ID (recommended) or name
+    of the respective table in Airtable; these tables must already exist
   - `AKENEO_BASE_URL` - the base URL for your Akeneo PIM instance, such as
     "https://tested-with.trial.akeneo.cloud/"
   - `AKENEO_CLIENT_ID`, `AKENEO_SECRET`, `AKENEO_USERNAME`, `AKENEO_PASSWORD` -
