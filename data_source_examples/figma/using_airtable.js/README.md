@@ -1,20 +1,22 @@
 # Import list of Figma projects, files, and pages into Airtable
 
 This code example can be used to update or insert ("upsert") your team's lists
-of Figma projects, files, and pages into Airtable. This can help you organize your design projects, their statuses, and tasks. You can schedule this script
-to run on a recurring schedule to keep your Airtable base "in sync" with Figma.
+of Figma projects, files, and pages into Airtable. This can help you organize
+your design projects, their statuses, and tasks. You can schedule this script to
+run on a recurring schedule to keep your Airtable base "in sync" with Figma.
 
 This code example is based on
 [the generic airtable.js upsert example](.../../../../../javascript/using_airtable.js/)
-and uses [`Airtable.js`](https://github.com/airtable/airtable.js) (maintained by Airtable) to interact
-with the Airtable REST API and
-[`figma-js`](https://github.com/jemgold/figma-js/) (community-supported, not by Figma) to connect to Figma's API.
+and uses [`Airtable.js`](https://github.com/airtable/airtable.js) (maintained by
+Airtable) to interact with the Airtable REST API and
+[`figma-js`](https://github.com/jemgold/figma-js/) (community-supported, not by
+Figma) to connect to Figma's API.
 
 The following screenshots show the gallery view of files and the base schema of
 the sample base linked to in the instructions below.
 
 | [![Figma and Airtable side-by-side](assets/figma_airtable_side_by_side.png)](assets/figma_airtable_side_by_side.png) | [![Base schema](assets/base_schema.png)](assets/base_schema.png) |
-| ------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
 
 ---
 
@@ -53,7 +55,12 @@ is" basis and provided without express or implied warranties of any kind.
 - [`.env.example`](.env.example) is an example file template to follow for your
   own `.env` file. The environment variables supported are:
   - `AIRTABLE_API_KEY` -
-    [your Airtable API key](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-)
+    [your Airtable personal access token](https://support.airtable.com/docs/creating-and-using-api-keys-and-access-tokens)
+    with
+    [`data.records:read`](https://airtable.com/developers/web/api/scopes#data-records-read)
+    and
+    [`data.records:write`](https://airtable.com/developers/web/api/scopes#data-records-write)
+    scopes and access to the base ID below
   - `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base's
     API docs from https://airtable.com/api. This will always start with `app`
   - `FIGMA_PERSONAL_ACCESS_TOKEN` -
