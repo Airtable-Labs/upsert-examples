@@ -22,8 +22,6 @@ The software made available from this repository is not supported by Formagrid I
   - Loads dependencies and configuration variables
   - Connects to Snowflake using the Snowflake Python Connector
   - Queries all records from the specified Snowflake Table or View and sets this list to the variable `inputRecords`
-  - Retrieves all existing records in the Airtable base and creates a mapping of the unqiue field's value to the existing record ID for later updating
-  - Loops through each record from the `inputRecords` list and determines if an existing record should be updated or a new one should be created
   - In chunks of 10, updates existing and creates new records
 - [`.env.example`](.env.example) is an example file template to follow for your own `.env` file. The environment variables supported are:
   - `AIRTABLE_API_KEY` - [your Airtable API key or personal access token](https://support.airtable.com/docs/creating-and-using-api-keys-and-access-tokens)
