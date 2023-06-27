@@ -55,8 +55,7 @@ is" basis and provided without express or implied warranties of any kind.
 - [`.env.example`](.env.example) is an example file template to follow for your
   own `.env` file. The environment variables expected are:
   - `AIRTABLE_API_KEY` -
-    [your Airtable API key](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-);
-    we suggest using a personal access token
+    [your Airtable API personal access token](https://support.airtable.com/docs/creating-and-using-api-keys-and-access-tokens)
   - `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base's
     API docs from https://airtable.com/api. This will always start with `app`
   - `AIRTABLE_PRODUCTS_TABLE`, `AIRTABLE_CATEGORIES_TABLE`,
