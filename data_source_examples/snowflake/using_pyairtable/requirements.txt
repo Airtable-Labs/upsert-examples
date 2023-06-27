@@ -1,2 +1,2 @@
-pyairtable
+pyairtable>=1.5.0
 snowflake-connector-python[pandas]
