@@ -14,7 +14,6 @@ The software made available from this repository is not supported by Formagrid I
 1. Clone/unzip code
 2. Copy `.env.example` to `.env` and populate values
     - Explanations of each environment variable is available below
-3. [Set up a python development environment](https://cloud.google.com/python/docs/setup)
 3. Install Python dependencies using `pip3 install -r requirements.txt`
 4. Run `python3 index.py` to run the script
 
@@ -44,3 +43,20 @@ The software made available from this repository is not supported by Formagrid I
 - The field used for uniqueness does not have to be the primary field.
 - The field name for the unique field is expected to remain consistent. If it changes, update the environment variable
 - Each existing and new record is expected to have a value for the field used for uniqueness.
+- Airtable field names are expected to match BigQuery column names.
+- If you'd like to see both update and create operations execute, you can apply these operations on your BigQuery data after the initial import. Here is a sample SQL query:
+  - ```sql
+BEGIN
+  -- update query
+  UPDATE `dataset.table_or_view`
+  SET 
+    column1 = 'value_a',
+    column2 = 'value_b'
+  WHERE column3 = 'value_c';
+
+  -- insert query 
+  INSERT `dataset.table_or_view` (column1, column2, column3)
+  VALUES ('value1', 'value2', 'value3');
+END;
+```
+  - Then, run the script a 2nd time to see the upsert applied to the data in Airtable.
