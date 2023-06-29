@@ -44,8 +44,8 @@ The software made available from this repository is not supported by Formagrid I
 - The field name for the unique field is expected to remain consistent. If it changes, update the environment variable
 - Each existing and new record is expected to have a value for the field used for uniqueness.
 - Airtable field names are expected to match BigQuery column names.
-- If you'd like to see both update and create operations execute, you can apply these operations on your BigQuery data after the initial import. Here is a sample SQL query:
-  - ```sql
+- If you'd like to see both update and create operations execute, you can apply these operations on your BigQuery data after the initial import and then run the script again. Here is a sample SQL query:
+```sql
 BEGIN
   -- update query
   UPDATE `dataset.table_or_view`
@@ -59,4 +59,3 @@ BEGIN
   VALUES ('value1', 'value2', 'value3');
 END;
 ```
-  - Then, run the script a 2nd time to see the upsert applied to the data in Airtable.
