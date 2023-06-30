@@ -41,32 +41,22 @@ by creating a copy of
 [this sample table](https://airtable.com/shrB2653wGPc4KwoZ) by selecting the
 "Use data" button in the top right corner of the page (recommended).
 
-Alternatively, you can create a table with the following fields: | **Field
-Name**|
-[**Airtable Field Type**](https://support.airtable.com/hc/en-us/articles/360055885353-Field-types-overview)|
-**Description/Notes**| |---	|---	|---	| | Channel ID + Message Timestamp 	| Single
-line text 	| Primary field and unique field. Though Airtable will not force
-values to be unique, our script will by using this field as the
-AIRTABLE_UNIQUE_FIELD_NAME 	| | Channel ID 	| Single line text 	| Slack channel ID
-| | Timestamp 	| Single line text 	| Slack message timestamp with six decimal
-points. Message timestamps are unique within a single channel 	| | Last Edited
-Timestamp 	| Single line text 	| The timestamp when the message was last edited 	|
-| Type 	| Single line text 	| Message type* 	| | Subtype 	| Single line text 	|
-Message subtype* 	| | Slack User ID 	| Single line text 	| Message author's Slack
-user ID 	| | Message text 	| Long text 	| The plain text or Slack markdown
-representation of the message. If you see 'This content can't be displayed.'
-here, the message may be from a bot or application. In those cases, inspect the
-'Full Message Payload (JSON)' field. 	| | Reply Count 	| Number 	| The number of
-threaded replies the message has received. 	| | Parent Message 	| Linked record 	|
-Self-linking linked record to associate threaded replies with their parent
-message. 	| | Full Message Payload (JSON) 	| Long text 	| A
-[JSON](https://www.json.org/json-en.html) representation of the full message
-object* retrieved from the Slack API. This can be useful for exploring
-additional message attributes not listed above. 	| | Timestamp (Human Readable) 	|
-Formula 	| (Optional) `DATETIME_PARSE({Timestamp}, 'X')`; This will display a
-human-readable representation of the time the message was sent. 	| | Parent or
-Thread? 	| Formula 	| (Optional)
-`IF({Parent Message},"Threaded reply","Parent message")`|
+Alternatively, you can create a table with the following fields:
+| **Field Name** 	| [**Airtable Field Type**](https://support.airtable.com/hc/en-us/articles/360055885353-Field-types-overview) 	| **Description/Notes** 	|
+|---	|---	|---	|
+| Channel ID + Message Timestamp 	| Single line text 	| Primary field and unique field. Though Airtable will not force values to be unique, our script will by using this field as the AIRTABLE_UNIQUE_FIELD_NAME 	|
+| Channel ID 	| Single line text 	| Slack channel ID 	|
+| Timestamp 	| Single line text 	| Slack message timestamp with six decimal points. Message timestamps are unique within a single channel 	|
+| Last Edited Timestamp 	| Single line text 	| The timestamp when the message was last edited 	|
+| Type 	| Single line text 	| Message type* 	|
+| Subtype 	| Single line text 	| Message subtype* 	|
+| Slack User ID 	| Single line text 	| Message author's Slack user ID 	|
+| Message text 	| Long text 	| The plain text or Slack markdown representation of the message. If you see 'This content can't be displayed.' here, the message may be from a bot or application. In those cases, inspect the 'Full Message Payload (JSON)' field.  	|
+| Reply Count 	| Number 	| The number of threaded replies the message has received. 	|
+| Parent Message 	| Linked record 	| Self-linking linked record to associate threaded replies with their parent message. 	|
+| Full Message Payload (JSON) 	| Long text 	| A [JSON](https://www.json.org/json-en.html) representation of the full message object* retrieved from the Slack API. This can be useful for exploring additional message attributes not listed above. 	|
+| Timestamp (Human Readable) 	| Formula 	| (Optional) `DATETIME_PARSE({Timestamp}, 'X')`; This will display a human-readable representation of the time the message was sent. 	|
+| Parent or Thread? 	| Formula 	| (Optional) `IF({Parent Message},"Threaded reply","Parent message")` 	|
 
 *For more information about Slack attributes such as types, subtypes, and more,
 visit
