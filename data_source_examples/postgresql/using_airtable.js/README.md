@@ -33,15 +33,8 @@ Important: This code example assumes that your table names and field names in
 Airtable and Postgres are identical with the exception of linked record fields
 (see the screenshot link and table below for details)
 
-For example, the Postgres database this example was based on can be viewed on
-bit.io [here](https://bit.io/marks/example_project_management).
-
-By the way: Bit.io allows you to share database with others without having to
-handle any infrastructure yourelf. You can try this code example with the
-aforementioned example database by viewing the link above, clicking 'Connect',
-signing up, and using the Postgres connection string from the 'Connect' UI.
-
-The database has three tables: `clients`, `projects`, and `tasks`. Each table
+For this example, the free tier of [supabase.com](https://supabase.com/)'s Postgres-compatible database
+product was used.  The test database had three tables: `clients`, `projects`, and `tasks`. Each table
 has a `name` field. Projects belong to one client (`projects.client_name` <=>
 `clients.name`) and tasks belong to one project (`tasks.project_name` <=>
 `projects.name`). Exported CSVs of each of the three tables can be found in the
@@ -87,9 +80,7 @@ scheduled task on a server or cloud function.
 1. Clone/unzip code
 2. Copy `.env.example` to `.env` and populate values (see description of
    `.env.example` below for details on each environment variable)
-3. Install node dependencies including
-   [`airtable.js`](https://github.com/airtable/airtable.js) and
-   [`pg`](https://node-postgres.com/)
+3. Install node dependencies by running `npm install`
 4. Trigger the script to execute by running `npm run sync`
 5. Records in the specified Airtable base’s tables should be created/updated.
 
@@ -113,17 +104,13 @@ scheduled task on a server or cloud function.
 - [`.env.example`](.env.example) is an example file template to follow for your
   own `.env` file. The environment variables supported are:
   - `AIRTABLE_API_KEY` -
-    [your Airtable API key](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-);
-    it will always start with `key`
+    [your Airtable personal access token](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-) with the [`data.records:write`](https://github.com/Airtable-Labs/upsert-examples/pull/47) scope and access to the base below
   - `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base’s
     API docs from https://airtable.com/api. This will always start with `app`
-  - `AIRTABLE_PRIMARY_FIELD_NAME` - the name of your Airtable tables' primary
-    field. Should always be `name` when using the example links in step A.
+  - `AIRTABLE_PRIMARY_FIELD_ID_OR_NAME` - the name (or ID) of your Airtable tables' primary
+    field. The human-readable name should be `name` if using the example links in step A.
   - `TABLE_NAMES_AS_CSV_STRING` - A comma separated list of tables, for example
     `clients,projects,tasks`
   - `POSTGRES_CONNECTION_STRING` - the Postgres connection string to connect and
     authenticate to your Postgres database
-  - `POSTGRES_TABLE_PREFIX_IF_ANY` - the prefix to your Postgres database. When
-    using the example links in Step A, this value should be
-    `"marks/example_project_management".` based on the way
-    [bit.io](https://bit.io/) namespaces tables.
+  - `POSTGRES_TABLE_PREFIX_IF_ANY` - the prefix to your Postgres database, if there is one
