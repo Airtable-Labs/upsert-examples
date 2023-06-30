@@ -6,10 +6,10 @@ const Airtable = require('airtable')
 const { Client } = require('pg')
 
 // Load helper functions from *_helpers.js
-const { createMappingOfUniqueFieldToRecordId, actOnRecordsInChunks } = require('./airtable_helpers')
+const { upsertRecordsInChunks } = require('./airtable_helpers')
 
 // Define variables and initialize Airtable client
-const { AIRTABLE_API_KEY, AIRTABLE_BASE_ID, AIRTABLE_PRIMARY_FIELD_NAME } = process.env
+const { AIRTABLE_API_KEY, AIRTABLE_BASE_ID, AIRTABLE_PRIMARY_FIELD_ID_OR_NAME } = process.env
 Airtable.configure({ apiKey: AIRTABLE_API_KEY })
 const base = Airtable.base(AIRTABLE_BASE_ID)
 
@@ -39,55 +39,16 @@ console.log(`Table names: ${TABLE_NAMES.join(', ')}`)
     const inputRecords = postgresTableQuery.rows
     console.log(`\tFound ${inputRecords.length} rows in Postgres`)
 
-    // Retrieve rows from Airtable
-    const table = await base(tableName)
-    const airtableExistingRecords = await table.select().all()
-    console.log(`\tFound ${airtableExistingRecords.length} rows in Airtable`)
+    // Create reference to Airtable table
+    const airtableTable = await base(tableName)
 
-    // Create an object mapping of the primary field to the record ID
-    // Remember, it's assumed that the AIRTABLE_PRIMARY_FIELD_NAME field is truly unique
-    const mapOfUniqueIdToExistingRecordId = createMappingOfUniqueFieldToRecordId(airtableExistingRecords, AIRTABLE_PRIMARY_FIELD_NAME)
+    // Format record data to be compatible with Airtable's API
+    const recordsToUpsert = inputRecords.map((r) => {
+      return { fields: r }
+    })
 
-    // Create two arrays: one for records to be created, one for records to be updated
-    const recordsToCreate = []
-    const recordsToUpdate = []
-
-    // For each input record, check if it exists in the existing records. If it does, update it. If it does not, create it.
-    console.log(`\t\tProcessing ${inputRecords.length} records to determine whether to update or create`)
-    for (const inputRecord of inputRecords) {
-      const recordUniqueFieldValue = inputRecord[AIRTABLE_PRIMARY_FIELD_NAME]
-      console.debug(`\t\tProcessing record w/ '${AIRTABLE_PRIMARY_FIELD_NAME}' === '${recordUniqueFieldValue}'`)
-      // Check for an existing record with the same unique ID as the input record
-      const recordMatch = mapOfUniqueIdToExistingRecordId[recordUniqueFieldValue]
-
-      if (recordMatch === undefined) {
-        // Add record to list of records to update
-        console.log('\t\t\tNo existing records match; adding to recordsToCreate')
-        recordsToCreate.push({ fields: inputRecord })
-      } else {
-        // Add record to list of records to create
-        console.log(`\t\t\tExisting record w/ ID ${recordMatch} found; adding to recordsToUpdate`)
-        recordsToUpdate.push({ id: recordMatch, fields: inputRecord })
-      }
-    }
-
-    // Read out array sizes
-    console.log(`\n\tRecords to create: ${recordsToCreate.length}`)
-    console.log(`\tRecords to update: ${recordsToUpdate.length}\n`)
-
-    try {
-      // Perform record creation
-      await actOnRecordsInChunks(table, 'create', recordsToCreate)
-
-      // Perform record updates on existing records
-      await actOnRecordsInChunks(table, 'update', recordsToUpdate)
-    } catch (error) {
-      console.error('An error occured while creating or updating records using the Airtable REST API')
-      console.error(error)
-      throw (error)
-    }
-
-    // console.log(`\tFinished processing table ${tableName}`)
+    // Upsert records in Airtable
+    await upsertRecordsInChunks(airtableTable, recordsToUpsert, [AIRTABLE_PRIMARY_FIELD_ID_OR_NAME])
   }
 
   console.log('\n\nScript execution complete')
