@@ -14,7 +14,7 @@ Airtable.configure({ apiKey: AIRTABLE_API_KEY })
 const base = Airtable.base(AIRTABLE_BASE_ID)
 
 // Define variables and initialize PostgreSQL client/pool
-const { POSTGRES_CONNECTION_STRING, POSTGRES_TABLE_PREFIX_IF_ANY } = process.env;
+const { POSTGRES_CONNECTION_STRING, POSTGRES_TABLE_PREFIX_IF_ANY } = process.env
 const postgres = new Client({ connectionString: POSTGRES_CONNECTION_STRING })
 postgres.connect()
 
@@ -23,14 +23,12 @@ const { TABLE_NAMES_AS_CSV_STRING } = process.env
 const TABLE_NAMES = TABLE_NAMES_AS_CSV_STRING.split(',')
 console.log(`Table names: ${TABLE_NAMES.join(', ')}`)
 
-  ;
+;
 
 (async () => {
-
-  ////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////
   // Note: you should not need to edit the code below this comment
-  ////////////////////////////////////////////////////////////////////
-
+  /// /////////////////////////////////////////////////////////////////
 
   // Process each table one at a time
   for (const tableName of TABLE_NAMES) {
@@ -94,5 +92,4 @@ console.log(`Table names: ${TABLE_NAMES.join(', ')}`)
 
   console.log('\n\nScript execution complete')
   await postgres.end()
-
 })()
