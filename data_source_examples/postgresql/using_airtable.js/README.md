@@ -23,9 +23,9 @@ is" basis and provided without express or implied warranties of any kind.
 This section will walk you through setting up three components:
 
 - A. Your existing (i) Postgres database and (ii) Airtable base
-- B. The [`index.js`](./index.js) script (which will `SELECT` rows from the
-  specified Postgres tables and upsert (insert-or-update) them into your
-  Airtable )
+- B. The [`index.js`](./index.js) script (which will loop through each table and
+  `SELECT` rows from the Postgres database and upsert (insert-or-update) them
+  into your Airtable table)
 
 ### A. PostgreSQL and Airtable Base Setup
 
