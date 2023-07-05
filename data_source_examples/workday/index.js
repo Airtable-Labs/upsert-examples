@@ -9,14 +9,14 @@ const axios = require('axios');
 const Airtable = require('airtable');
 
 // Load helper functions from helpers.js
-const { createMappingOfUniqueFieldToRecordId, actOnRecordsInChunks } = require('./helpers')
+const { upsertRecordsInChunks } = require('./helpers')
 
 // Read in environment variable values
 const { 
     AIRTABLE_API_KEY, 
     AIRTABLE_BASE_ID,
     AIRTABLE_TABLE_ID,
-    AIRTABLE_UNIQUE_FIELD_NAME,
+    AIRTABLE_UNIQUE_FIELD_NAME_OR_ID,
     WORKDAY_USERNAME,
     WORKDAY_PASSWORD,
     WORKDAY_RAAS_URL
@@ -54,7 +54,7 @@ const getWorkdayData = async () => {
     // Retrieve Workday data
     const purchaseOrders = await getWorkdayData();
 
-    // Create empty array to story shaped objects of flattened Workday data
+    // Create empty array to store shaped objects of flattened Workday data
     // this will be easier to work with when performing upsert logic
     const dataForAirtable = [];
 
@@ -89,42 +89,12 @@ const getWorkdayData = async () => {
         You can find examples here: https://github.com/Airtable-Labs/upsert-examples
     */
 
-    // Query existing records in Airtable
-    const existingRecords = await table.select().all();
+    // Read out array size
+    console.log(`\nRecords to upsert: ${dataForAirtable.length}`)
 
-    // Create a map of Airtable Unique Field value and Airtable Record ID
-    const mapOfUniqueIdToExistingRecordId = createMappingOfUniqueFieldToRecordId(existingRecords, AIRTABLE_UNIQUE_FIELD_NAME);
-    
-    // Two empty arrays to store records that will need to be either created or updated
-    const recordsToCreate = [];
-    const recordsToUpdate = [];
+    // Perform record upserts
+    await upsertRecordsInChunks(table, dataForAirtable, [AIRTABLE_UNIQUE_FIELD_NAME_OR_ID])
 
-    // Loop through Workday data that's been shaped
-    for (const record of dataForAirtable) {
-
-        // create unique key that exists in Airtable. This will be used to identify whether a record already exists and should be updated
-        // This is specific to the fields in the Workday report and fields in Airtable. Update accordingly
-        const uniqueKey = record.fields['Purchase Order'] + '|' + record.fields['Spend_Category_as_Worktag'] + '|' + record.fields['Extended Amount'];
-
-          // find matching key and record ID
-        const recordMatch = mapOfUniqueIdToExistingRecordId[uniqueKey];
-
-        // if no match, create new record, otherwise update existing
-        if (recordMatch === undefined) {
-            recordsToCreate.push(record);
-        } else {
-            recordsToUpdate.push({ id: recordMatch, fields: record.fields });
-        }
-     }
-
-    // output how many records to be created and updated
-    console.log(`Records to create: ${recordsToCreate.length}`);
-    console.log(`Records to update: ${recordsToUpdate.length}`);
-
-    // Perform record creation
-    await actOnRecordsInChunks(table, 'create', recordsToCreate);
-
-    // Perform record updates on existing records
-    await actOnRecordsInChunks(table, 'update', recordsToUpdate);
+    console.log('\n\nScript execution complete!')
 })();
 
