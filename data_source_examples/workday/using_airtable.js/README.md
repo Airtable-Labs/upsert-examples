@@ -1,8 +1,6 @@
 # Using RaaS and Airtable.js to Import Workday Data into Airtable
 
-This example demonstrates how to use Workday RaaS to export data from Workday and Airtable's REST API to import that data into Airtable using [Airtable.js](https://github.com/airtable/airtable.js/). 
-
-Alternatively, you can use [Airtable Automations](https://support.airtable.com/hc/en-us/articles/360050974153-Automations-overview) with [Run a Script action](https://support.airtable.com/hc/en-us/articles/360051792333) which is detailed at the bottom of this README.
+This example demonstrates how to use Workday RaaS to export data from Workday and Airtable's REST API to import that data into Airtable using [Airtable.js](https://github.com/airtable/airtable.js/).
 
 #### ？What is Workday?
 Workday delivers user and administrative tools across financials, HR, planning, talent, payroll, analytics, and more.
@@ -21,13 +19,13 @@ Workday has a _Reporting as a Service_ (RaaS) interface which allows you to expo
 ## Quick Start
 1. Clone/unzip code
 2. Copy `.env.example` to `.env` and populate values:
-    * Airtable API Key - this can be retrieved in your Account settings. [Here is a help article](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-)
-    * Airtable Base ID - the Base ID is located in the URL of the base after airtable.com/: https://airtable.com/**appXXXXXXXXXXXX**
-    * Airtable Table ID - the Table ID is located in the URL of the base as well: https://airtable.com/appXXXXXXXXXXXX/**tblXXXXXXXXXXX**
-    * Airtable Unique value Field Name - The field in Airtable that will represent the _unique identifier_
-    * Workday username
-    * Workday password
-    * Workday RaaS URL - see instructions in the next section
+    * `AIRTABLE_API_KEY` - [your Airtable API key](https://airtable.com/developers/web/guides/personal-access-tokens); it will always start with `pat`
+    * `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base's API docs from https://airtable.com/api. This will always start with `app`: https://airtable.com/**appXXXXXXXXXXXX**
+    * `AIRTABLE_TABLE_ID` - the ID of the table you want to create/update records in; you can find this in the URL of your browser when viewing the table. It will start with `tbl`: https://airtable.com/appXXXXXXXXXXXX/**tblXXXXXXXXXXX**
+    * `AIRTABLE_UNIQUE_FIELD_NAME_OR_ID` - the field name of the field that is used for determining if an existing records exists that needs to be updated (if no record exists, a new one will be created)
+    * `WORKDAY_USERNAME`
+    * `WORKDAY_PASSWORD`
+    * `WORKDAY_RAAS_URL` - see instructions in the next section
 3. Install node dependencies using `npm install`
     * dotenv
     * axios
@@ -62,13 +60,5 @@ Here is an example of that formula:
 ```sh
 {Purchase Order} & "|" & {Spend_Category_as_Worktag} & "|" & {Extended Amount}
 ```
-
-## Alternative Approach
-
-##### _Airtable Automation's + Run a Script action_
-
-Rather than host a node script on a server, Airtable can execute Javascript code within Automations.
-For example, an automation can be scheduled to run every day at 12am, and similar code can run to make the request to retrieve the Workday data.
-![Airtable Automation's example](https://p-xBFZb7R.b0.n0.cdn.getcloudapp.com/items/ApuJY91R/b14389e8-c109-4265-a039-4a51d15dd847.png?source=viewer&v=735325a590e896ab7e4136e125ad4ba1)
 
 
