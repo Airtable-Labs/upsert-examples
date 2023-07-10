@@ -22,10 +22,8 @@ The software made available from this repository is not supported by Formagrid I
 - [`example.py`](example.py) is the main code file which is executed when `python3 example.py` is run. At a high level, it performs the following:
   - Loads dependencies and configuration variables
   - Queries all features from Aha.io View and sets this list to the variable `inputRecords`
-  - Retrieves more information about each feature from Aha.io wit
-  - Retrieves all existing records in the Airtable base and creates a mapping of the unqiue field's value to the existing record ID for later updating
-  - Loops through each record from the `inputRecords` list and determines if an existing record should be updated or a new one should be created
-  - In chunks of 10, updates existing and creates new records
+  - Retrieves more information about each feature from Aha.io with additional API calls
+  - In chunks of 10, upserts records
 - [`.env.example`](.env.example) is an example file template to follow for your own `.env` file. The environment variables supported are:
   - `AIRTABLE_API_KEY` - [your Airtable personal access token](https://support.airtable.com/docs/creating-and-using-api-keys-and-access-tokens)
   - `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base's API docs from https://airtable.com/api. This will always start with `app`
@@ -36,6 +34,6 @@ The software made available from this repository is not supported by Formagrid I
 
 ### Notes
 - [pyairtable](https://github.com/gtalarico/pyairtable) handles API rate limiting
-- The field used for uniqueness does not have to be the primary field.
+- The field used for uniqueness does not have to be the primary field. The following field types are supported: number, text, long text, single select, multiple select, and date.
 - The field name for the unique field is expected to remain consistent. If it changes, update the environment variable
 - Each existing and new record is expected to have a value for the field used for uniqueness. 
