@@ -13,7 +13,7 @@ SERVICENOW_PASSWORD = os.environ["SERVICENOW_PASSWORD"]
 AIRTABLE_API_KEY = os.environ["AIRTABLE_API_KEY"]
 AIRTABLE_BASE_ID = os.environ["AIRTABLE_BASE_ID"]
 AIRTABLE_TABLE_ID = os.environ["AIRTABLE_TABLE_ID"]
-AIRTABLE_UNIQUE_FIELD_NAME = os.environ["AIRTABLE_UNIQUE_FIELD_NAME"]
+AIRTABLE_UNIQUE_FIELD_ID_OR_NAME = os.environ["AIRTABLE_UNIQUE_FIELD_ID_OR_NAME"]
 
 # Initialize Airtable Client
 Table = Table(AIRTABLE_API_KEY, AIRTABLE_BASE_ID, AIRTABLE_TABLE_ID)
@@ -60,6 +60,7 @@ for record in inputRecords:
 print(f"{len(recordsToUpsert)} records to upsert.")
 
 # Perform record upsert
-Table.batch_upsert(recordsToUpsert, [AIRTABLE_UNIQUE_FIELD_NAME], typecast=True)
+Table.batch_upsert(recordsToUpsert, [
+                   AIRTABLE_UNIQUE_FIELD_ID_OR_NAME], typecast=True)
 
 print("\n\nScript execution complete!")

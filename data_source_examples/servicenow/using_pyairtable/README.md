@@ -46,7 +46,7 @@ is" basis and provided without express or implied warranties of any kind.
   - `AIRTABLE_TABLE_ID` - the ID of the table you want to create/update records
     in; you can find this in the URL of your browser when viewing the table. It
     will start with `tbl`
-  - `AIRTABLE_UNIQUE_FIELD_NAME` - the field name of the field that is used for
+  - `AIRTABLE_UNIQUE_FIELD_ID_OR_NAME` - the field ID or name of the field that is used for
     determining if an existing records exists that needs to be updated (if no
     record exists, a new one will be created). In this case, we use the record's
     system ("sys") generated ID.
