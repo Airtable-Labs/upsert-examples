@@ -7,7 +7,7 @@ recurring schedule to keep your Airtable base "in sync" with ServiceNow.
 This code is based on
 [the generic pyAirtable upsert example]((.../../../../../javascript/using_pyAirtable/))
 and uses [pyAirtable](https://github.com/gtalarico/pyairtable) (maintained by
-our community) to interact with the Airtable REST API and
+the community) to interact with the Airtable REST API and
 [ServiceNow's python connector](https://github.com/ServiceNow/PySNC) to interact
 with
 [ServiceNow's Table API](https://docs.servicenow.com/en-US/bundle/utah-api-reference/page/integrate/inbound-rest/concept/c_TableAPI.html).
