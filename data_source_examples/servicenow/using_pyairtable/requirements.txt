@@ -1,0 +1,2 @@
+pyairtable>=1.5.0
+pysnc>=1.1.4

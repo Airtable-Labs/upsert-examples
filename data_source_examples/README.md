@@ -12,6 +12,7 @@ There are currently several data source specific upsert examples available:
 - [**Figma**](figma/using_airtable.js/) - import metadata (name, ID, thumbnail when available) for each of your team's Figma projects, files, and pages into an Airtable base 
 - [**Frame.io Assets**](frameIO/using_pyairtable/) - import metadata (name, ID, type, status) from your team's Frame.io assets into a table in Airtable
 - [**PostrgeSQL database**](postgresql/using_airtable.js/) - import rows from multiple PostgreSQL tables into an Airtable base while maintaining table to table relationships
+- [**ServiceNow**](servicenow/using_pyairtable/) - import records from a specified ServiceNow table into Airtable
 - [**Slack Conversation History**](slack_conversation_history/using_airtable.js/) - bring messages from a Slack channel into a single Airtable table 
 - [**Snowflake**](snowflake/using_pyairtable/) - import records from a provided Snowflake table or view into Airtable
 - [**Workday Reports**](workday) - leverage Workday's RaaS (reporting as a service) functionality to export data from Workday and import it into Airtable
