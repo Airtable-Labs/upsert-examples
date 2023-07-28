@@ -4,6 +4,10 @@ This code example can be used to update or insert ("upsert") the list of records
 from a ServiceNow Table into Airtable. You can schedule this script to run on a
 recurring schedule to keep your Airtable base "in sync" with ServiceNow.
 
+This specific example syncs all records in the `incident` table in ServiceNow to
+Airtable and assumes your Airtable table has fields that match the values in lines
+46-54 of [`example.py`](./example.py). 
+
 This code is based on
 [the generic pyAirtable upsert example]((.../../../../../javascript/using_pyAirtable/))
 and uses [pyAirtable](https://github.com/gtalarico/pyairtable) (maintained by
