@@ -1,6 +1,8 @@
 # Import Records from Salesforce into Airtable via Web API
 
 This code example can be used to update or insert ("upsert") the list of records
+that match a
+[SOQL query](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm)
 from a Salesforce object into Airtable. You can schedule this script to run on a
 recurring schedule to keep your Airtable base "in sync" with Salesforce.
 
