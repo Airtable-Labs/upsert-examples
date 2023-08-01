@@ -25,21 +25,20 @@ The software made available from this repository is not supported by Formagrid I
 1. Clone/unzip code
 2. Copy `.env.example` to `.env` and populate values
 3. Install PHP dependencies using `composer install`
-4. (Optional) Modify `data.csv` file with new values to see upsert in action
+4. (Optional) Modify `$inputRecords` in `main.php` with new static values or dynamically fetched values from your source of choice (API, file, etc.)
 5. Run `php main.php` to run the script
 
 ### Key files and their contents
 - [`main.php`](main.php) is the main code file which is executed when `php main.php` is run. At a high level, it performs the following:
   - Loads dependencies and configuration variables
-  - Reads data from a CSV
-  - In chunks of 10, converts data to Airtable record format and updates existing and creates new records
-- [`helpers.php`](helpers.php) is referenced by `main.php` and contains helper functions to read a CSV and call the [Airtable REST API](https://support.airtable.com/docs/getting-started-with-airtables-web-api).
+  - Defines a sample `$inputRecords` array which should be modified to reference an external data source
+  - In chunks of 10, updates existing and creates new records
+- [`helpers.php`](helpers.php) is referenced by `main.php` and contains helper functions to prep data for airtable upsert requests and call the [Airtable REST API](https://support.airtable.com/docs/getting-started-with-airtables-web-api).
 - [`.env.example`](.env.example) is an example file template to follow for your own `.env` file. The environment variables supported are:
   - `AIRTABLE_API_KEY` - [your Airtable personal access token](https://airtable.com/developers/web/guides/personal-access-tokens); it will always start with `pat`
   - `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base's API docs from https://airtable.com/api. This will always start with `app`
   - `AIRTABLE_TABLE_ID` - the ID of the table you want to create/update records in; you can find this in the URL of your browser when viewing the table. It will start with `tbl`
   - `AIRTABLE_UNIQUE_FIELD_NAME_OR_ID` - the field name of the field that is used for determining if an existing records exists that needs to be updated (if no record exists, a new one will be created)
-- [`data.csv`](data.csv) - is an example file to demonstrate how to read from a CSV and import to Airtable.
 
 ### Notes
 - The [guzzle](https://github.com/guzzle/guzzle) library handles HTTP requests
