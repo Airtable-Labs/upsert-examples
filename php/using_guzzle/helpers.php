@@ -35,11 +35,11 @@ function upsert_to_airtable($baseId, $tableId, $apiKey, $records, $fieldsToMerge
             'Content-Type' => 'application/json'
         ]
     ]);
+    $url = "{$baseId}/{$tableId}";
 
     foreach ($chunks as $chunk) {
         $dataPayload = prepare_data_payload($chunk, $fieldsToMergeOn);
-        $url = "{$baseId}/{$tableId}";
-
+        
         $responseData = send_request($client, $url, $dataPayload);
 
         if (isset($responseData['records'])) {

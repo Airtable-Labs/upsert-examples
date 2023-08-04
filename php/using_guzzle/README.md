@@ -33,7 +33,7 @@ The software made available from this repository is not supported by Formagrid I
   - Loads dependencies and configuration variables
   - Defines a sample `$inputRecords` array which should be modified to reference an external data source
   - In chunks of 10, updates existing and creates new records
-- [`helpers.php`](helpers.php) is referenced by `main.php` and contains helper functions to prep data for airtable upsert requests and call the [Airtable REST API](https://support.airtable.com/docs/getting-started-with-airtables-web-api).
+- [`helpers.php`](helpers.php) is referenced by `main.php` and contains helper functions to prep data for Airtable upsert requests and call the [Airtable REST API](https://support.airtable.com/docs/getting-started-with-airtables-web-api).
 - [`.env.example`](.env.example) is an example file template to follow for your own `.env` file. The environment variables supported are:
   - `AIRTABLE_API_KEY` - [your Airtable personal access token](https://airtable.com/developers/web/guides/personal-access-tokens); it will always start with `pat`
   - `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base's API docs from https://airtable.com/api. This will always start with `app`
