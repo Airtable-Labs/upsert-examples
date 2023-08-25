@@ -21,7 +21,7 @@ repository:
   - [_using pyairtable_](python/using_pyairtable/) (a community-supported
     Airtable SDK)
 - **R**
-  - [_using airtabler_](r/using_airtabler/) (a community-supported Airtable SDK)
+  - [_using httr_](r/using_httr/) (a popular HTTP client)
 - **Ruby**
   - [_using Faraday_](ruby/using_faraday/) (a popular HTTP client)
 
