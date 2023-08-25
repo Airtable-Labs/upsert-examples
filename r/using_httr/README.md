@@ -46,8 +46,10 @@ been added to your local R installation.
 - [`.env.example`](.env.example) is an example file template to follow for your
 own `.env` file. The environment variables supported are:
   - `AIRTABLE_API_KEY` -
-  [your Airtable API key](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-);
-  it will always start with `key`
+    [your Airtable personal access token](https://airtable.com/developers/web/guides/personal-access-tokens);
+    it will always start with `pat`; the scope
+    [`data.records:write`](https://airtable.com/developers/web/api/scopes#data-records-write)
+    is required
   - `AIRTABLE_BASE_ID` - the ID of your base; you can find this on the base's
   API docs from <https://airtable.com/api>. This will always start with `app`
   - `AIRTABLE_TABLE_ID` - the ID of the table you want to create/update records
