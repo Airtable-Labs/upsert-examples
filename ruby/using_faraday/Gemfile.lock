@@ -1,0 +1,22 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    dotenv (2.8.1)
+    faraday (2.7.10)
+      faraday-net_http (>= 2.0, < 3.1)
+      ruby2_keywords (>= 0.0.4)
+    faraday-net_http (3.0.2)
+    faraday-retry (2.2.0)
+      faraday (~> 2.0)
+    ruby2_keywords (0.0.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  dotenv (~> 2.8)
+  faraday (~> 2.7)
+  faraday-retry (~> 2.2)
+
+BUNDLED WITH
+   1.17.2
