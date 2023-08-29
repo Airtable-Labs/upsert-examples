@@ -26,7 +26,7 @@ the community) to interact with the Airtable REST API and
 to interact with
 [Salesforce's REST API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_what_is_rest_api.htm)
 (and more specifically
-[the Bulk API for querying records](https://developer.salesforce.com/docs/atlas.en-us.232.0.api_asynch.meta/api_asynch/asynch_api_bulk_query_intro.htm).
+[the Bulk API for querying records](https://developer.salesforce.com/docs/atlas.en-us.232.0.api_asynch.meta/api_asynch/asynch_api_bulk_query_intro.htm)).
 
 ---
 
