@@ -12,13 +12,6 @@ The software made available from this repository is not supported by Formagrid I
 
 ---
 
-### Local setup
-1. Clone/unzip code
-2. Copy `.env.example` to `.env` and populate values. Consider duplicating [this sample base](https://airtable.com/shrgakIqrpwtkQL2p) with the schema described above.
-3. Install node dependencies using `npm install`
-4. (Optional) Modify `inputRecords` in `index.js` with new static values or dynamically fetched values from your source of choice (API, file, etc.)
-5. Run `npm start` to run the script
-
 ### [`script.js`](script.js)
 [`script.js`](script.js) is the single code file you will need to copy into a [Airtable Scripting App](https://airtable.com/marketplace/blkQyAKhJoGKqnR0T/scripting) inside your base. When run, it will:
   - Reads in configuration variables from script settings
